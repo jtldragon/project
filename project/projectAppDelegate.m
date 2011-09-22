@@ -7,6 +7,7 @@
 //
 
 #import "projectAppDelegate.h"
+#import "LoginViewController.h"
 
 @implementation projectAppDelegate
 
@@ -19,9 +20,14 @@
 
 @synthesize persistentStoreCoordinator=__persistentStoreCoordinator;
 
+@synthesize loginViewController=_loginViewController;
+
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Override point for customization after application launch.
+    // Add the login view controller's view to the window and display.
+    _loginViewController=[[LoginViewController alloc]initWithNibName:@"LoginViewController" bundle:nil];
+    self.window.rootViewController = self.loginViewController;
     [self.window makeKeyAndVisible];
     return YES;
 }
@@ -68,6 +74,7 @@
     [__managedObjectContext release];
     [__managedObjectModel release];
     [__persistentStoreCoordinator release];
+    [_loginViewController release];
     [super dealloc];
 }
 
