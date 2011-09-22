@@ -23,6 +23,17 @@
 		553E3364142B39E7003E4791 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 553E3362142B39E7003E4791 /* InfoPlist.strings */; };
 		553E3367142B39E7003E4791 /* projectTests.h in Resources */ = {isa = PBXBuildFile; fileRef = 553E3366142B39E7003E4791 /* projectTests.h */; };
 		553E3369142B39E7003E4791 /* projectTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 553E3368142B39E7003E4791 /* projectTests.m */; };
+		553E3375142B3A1D003E4791 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 553E3373142B3A1D003E4791 /* LoginViewController.m */; };
+		553E3376142B3A1D003E4791 /* LoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 553E3374142B3A1D003E4791 /* LoginViewController.xib */; };
+		553E3379142B3A72003E4791 /* rmit.png in Resources */ = {isa = PBXBuildFile; fileRef = 553E3378142B3A72003E4791 /* rmit.png */; };
+		553E33BB142B428D003E4791 /* TimetableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 553E33B9142B428D003E4791 /* TimetableViewController.m */; };
+		553E33BC142B428D003E4791 /* TimetableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 553E33BA142B428D003E4791 /* TimetableViewController.xib */; };
+		553E33C2142B62DE003E4791 /* LocationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 553E33C0142B62DE003E4791 /* LocationViewController.m */; };
+		553E33C3142B62DE003E4791 /* LocationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 553E33C1142B62DE003E4791 /* LocationViewController.xib */; };
+		553E33C8142B631A003E4791 /* BookmarkViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 553E33C6142B631A003E4791 /* BookmarkViewController.m */; };
+		553E33C9142B631A003E4791 /* BookmarkViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 553E33C7142B631A003E4791 /* BookmarkViewController.xib */; };
+		553E33CF142B6C9C003E4791 /* timetable.png in Resources */ = {isa = PBXBuildFile; fileRef = 553E33CE142B6C9C003E4791 /* timetable.png */; };
+		553E33D1142B6CD9003E4791 /* location.png in Resources */ = {isa = PBXBuildFile; fileRef = 553E33D0142B6CD9003E4791 /* location.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -41,20 +52,35 @@
 		553E333B142B39E7003E4791 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		553E333D142B39E7003E4791 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		553E333F142B39E7003E4791 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
-		553E3343142B39E7003E4791 /* project-Info.plist */ = {isa = PBXFileReference; path = "project-Info.plist"; sourceTree = "<group>"; };
+		553E3343142B39E7003E4791 /* project-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "project-Info.plist"; sourceTree = "<group>"; };
 		553E3345142B39E7003E4791 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		553E3347142B39E7003E4791 /* project-Prefix.pch */ = {isa = PBXFileReference; path = "project-Prefix.pch"; sourceTree = "<group>"; };
+		553E3347142B39E7003E4791 /* project-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "project-Prefix.pch"; sourceTree = "<group>"; };
 		553E3348142B39E7003E4791 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		553E334A142B39E7003E4791 /* projectAppDelegate.h */ = {isa = PBXFileReference; path = projectAppDelegate.h; sourceTree = "<group>"; };
+		553E334A142B39E7003E4791 /* projectAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = projectAppDelegate.h; sourceTree = "<group>"; };
 		553E334B142B39E7003E4791 /* projectAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = projectAppDelegate.m; sourceTree = "<group>"; };
 		553E334E142B39E7003E4791 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainWindow.xib; sourceTree = "<group>"; };
 		553E3351142B39E7003E4791 /* project.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = project.xcdatamodel; sourceTree = "<group>"; };
 		553E3358142B39E7003E4791 /* projectTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = projectTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
-		553E3361142B39E7003E4791 /* projectTests-Info.plist */ = {isa = PBXFileReference; path = "projectTests-Info.plist"; sourceTree = "<group>"; };
+		553E3361142B39E7003E4791 /* projectTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "projectTests-Info.plist"; sourceTree = "<group>"; };
 		553E3363142B39E7003E4791 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		553E3365142B39E7003E4791 /* projectTests-Prefix.pch */ = {isa = PBXFileReference; path = "projectTests-Prefix.pch"; sourceTree = "<group>"; };
+		553E3365142B39E7003E4791 /* projectTests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "projectTests-Prefix.pch"; sourceTree = "<group>"; };
 		553E3366142B39E7003E4791 /* projectTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = projectTests.h; sourceTree = "<group>"; };
 		553E3368142B39E7003E4791 /* projectTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = projectTests.m; sourceTree = "<group>"; };
+		553E3372142B3A1D003E4791 /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
+		553E3373142B3A1D003E4791 /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
+		553E3374142B3A1D003E4791 /* LoginViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoginViewController.xib; sourceTree = "<group>"; };
+		553E3378142B3A72003E4791 /* rmit.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = rmit.png; path = ../../../../Pictures/rmit.png; sourceTree = "<group>"; };
+		553E33B8142B428D003E4791 /* TimetableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TimetableViewController.h; sourceTree = "<group>"; };
+		553E33B9142B428D003E4791 /* TimetableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TimetableViewController.m; sourceTree = "<group>"; };
+		553E33BA142B428D003E4791 /* TimetableViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TimetableViewController.xib; sourceTree = "<group>"; };
+		553E33BF142B62DE003E4791 /* LocationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocationViewController.h; sourceTree = "<group>"; };
+		553E33C0142B62DE003E4791 /* LocationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocationViewController.m; sourceTree = "<group>"; };
+		553E33C1142B62DE003E4791 /* LocationViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LocationViewController.xib; sourceTree = "<group>"; };
+		553E33C5142B631A003E4791 /* BookmarkViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BookmarkViewController.h; sourceTree = "<group>"; };
+		553E33C6142B631A003E4791 /* BookmarkViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BookmarkViewController.m; sourceTree = "<group>"; };
+		553E33C7142B631A003E4791 /* BookmarkViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BookmarkViewController.xib; sourceTree = "<group>"; };
+		553E33CE142B6C9C003E4791 /* timetable.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = timetable.png; path = "../../../../Pictures/resource/glyphish-icons/icons/timetable.png"; sourceTree = "<group>"; };
+		553E33D0142B6CD9003E4791 /* location.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = location.png; path = "../../../../Pictures/resource/glyphish-icons/icons/location.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -90,6 +116,8 @@
 				553E335F142B39E7003E4791 /* projectTests */,
 				553E3338142B39E7003E4791 /* Frameworks */,
 				553E3336142B39E7003E4791 /* Products */,
+				553E3377142B3A4A003E4791 /* Resources */,
+				553E3342142B39E7003E4791 /* Supporting Files */,
 			);
 			sourceTree = "<group>";
 		};
@@ -116,11 +144,14 @@
 		553E3341142B39E7003E4791 /* project */ = {
 			isa = PBXGroup;
 			children = (
+				553E33C4142B62E5003E4791 /* BookmarkView */,
+				553E33BE142B42F4003E4791 /* LocationView */,
+				553E33BD142B4294003E4791 /* TimetableView */,
+				553E337A142B3A7A003E4791 /* LoginView */,
 				553E334A142B39E7003E4791 /* projectAppDelegate.h */,
 				553E334B142B39E7003E4791 /* projectAppDelegate.m */,
 				553E334D142B39E7003E4791 /* MainWindow.xib */,
 				553E3350142B39E7003E4791 /* project.xcdatamodeld */,
-				553E3342142B39E7003E4791 /* Supporting Files */,
 			);
 			path = project;
 			sourceTree = "<group>";
@@ -134,6 +165,7 @@
 				553E3348142B39E7003E4791 /* main.m */,
 			);
 			name = "Supporting Files";
+			path = project;
 			sourceTree = "<group>";
 		};
 		553E335F142B39E7003E4791 /* projectTests */ = {
@@ -154,6 +186,57 @@
 				553E3365142B39E7003E4791 /* projectTests-Prefix.pch */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		553E3377142B3A4A003E4791 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				553E33D0142B6CD9003E4791 /* location.png */,
+				553E33CE142B6C9C003E4791 /* timetable.png */,
+				553E3378142B3A72003E4791 /* rmit.png */,
+			);
+			name = Resources;
+			path = project;
+			sourceTree = "<group>";
+		};
+		553E337A142B3A7A003E4791 /* LoginView */ = {
+			isa = PBXGroup;
+			children = (
+				553E3374142B3A1D003E4791 /* LoginViewController.xib */,
+				553E3373142B3A1D003E4791 /* LoginViewController.m */,
+				553E3372142B3A1D003E4791 /* LoginViewController.h */,
+			);
+			name = LoginView;
+			sourceTree = "<group>";
+		};
+		553E33BD142B4294003E4791 /* TimetableView */ = {
+			isa = PBXGroup;
+			children = (
+				553E33B8142B428D003E4791 /* TimetableViewController.h */,
+				553E33B9142B428D003E4791 /* TimetableViewController.m */,
+				553E33BA142B428D003E4791 /* TimetableViewController.xib */,
+			);
+			name = TimetableView;
+			sourceTree = "<group>";
+		};
+		553E33BE142B42F4003E4791 /* LocationView */ = {
+			isa = PBXGroup;
+			children = (
+				553E33BF142B62DE003E4791 /* LocationViewController.h */,
+				553E33C0142B62DE003E4791 /* LocationViewController.m */,
+				553E33C1142B62DE003E4791 /* LocationViewController.xib */,
+			);
+			name = LocationView;
+			sourceTree = "<group>";
+		};
+		553E33C4142B62E5003E4791 /* BookmarkView */ = {
+			isa = PBXGroup;
+			children = (
+				553E33C5142B631A003E4791 /* BookmarkViewController.h */,
+				553E33C6142B631A003E4791 /* BookmarkViewController.m */,
+				553E33C7142B631A003E4791 /* BookmarkViewController.xib */,
+			);
+			name = BookmarkView;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -228,6 +311,13 @@
 			files = (
 				553E3346142B39E7003E4791 /* InfoPlist.strings in Resources */,
 				553E334F142B39E7003E4791 /* MainWindow.xib in Resources */,
+				553E3376142B3A1D003E4791 /* LoginViewController.xib in Resources */,
+				553E3379142B3A72003E4791 /* rmit.png in Resources */,
+				553E33BC142B428D003E4791 /* TimetableViewController.xib in Resources */,
+				553E33C3142B62DE003E4791 /* LocationViewController.xib in Resources */,
+				553E33C9142B631A003E4791 /* BookmarkViewController.xib in Resources */,
+				553E33CF142B6C9C003E4791 /* timetable.png in Resources */,
+				553E33D1142B6CD9003E4791 /* location.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -266,6 +356,10 @@
 				553E3349142B39E7003E4791 /* main.m in Sources */,
 				553E334C142B39E7003E4791 /* projectAppDelegate.m in Sources */,
 				553E3352142B39E7003E4791 /* project.xcdatamodeld in Sources */,
+				553E3375142B3A1D003E4791 /* LoginViewController.m in Sources */,
+				553E33BB142B428D003E4791 /* TimetableViewController.m in Sources */,
+				553E33C2142B62DE003E4791 /* LocationViewController.m in Sources */,
+				553E33C8142B631A003E4791 /* BookmarkViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
