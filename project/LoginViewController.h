@@ -7,13 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "projectAppDelegate.h"
 
 
 @interface LoginViewController : UIViewController {
     IBOutlet UIButton *button;
     IBOutlet UITextField *textfield;
     NSString *studentNumber;
+    projectAppDelegate *delegate;
     
 }
 - (IBAction)done:(id)sender;

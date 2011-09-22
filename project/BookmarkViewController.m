@@ -1,17 +1,15 @@
 //
-//  LoginViewController.m
+//  BookmarkViewController.m
 //  project
 //
 //  Created by Yeshu Liu on 22/09/11.
 //  Copyright 2011 RMIT. All rights reserved.
 //
 
-#import "LoginViewController.h"
+#import "BookmarkViewController.h"
 
 
-@implementation LoginViewController
-
-@synthesize studentNumber,textfield,button;
+@implementation BookmarkViewController
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -24,10 +22,6 @@
 
 - (void)dealloc
 {
-    [studentNumber release];
-    [textfield release];
-    [button release];
-    [delegate release];
     [super dealloc];
 }
 
@@ -44,8 +38,6 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    studentNumber=@"";
-    delegate=[[[UIApplication sharedApplication]delegate]retain];
     // Do any additional setup after loading the view from its nib.
 }
 
@@ -54,7 +46,6 @@
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
-    
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -62,20 +53,5 @@
     // Return YES for supported orientations
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
-
--(IBAction)done:(id)sender{
-    studentNumber=textfield.text;
-    NSLog(@"sudent no==%@",studentNumber);
-    [delegate.window addSubview:delegate.tabBarController.view];
-}
-- (IBAction)textFieldDoneEditing:(id)sender
-{
-    [textfield resignFirstResponder];
-        
-}
-- (IBAction)backgroundTouched:(id)sender
-{
-    [textfield resignFirstResponder];
-    }
 
 @end

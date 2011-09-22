@@ -22,12 +22,15 @@
 
 @synthesize loginViewController=_loginViewController;
 
+@synthesize tabBarController=_tabBarController;
+
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Override point for customization after application launch.
     // Add the login view controller's view to the window and display.
     _loginViewController=[[LoginViewController alloc]initWithNibName:@"LoginViewController" bundle:nil];
-    self.window.rootViewController = self.loginViewController;
+    //self.window.rootViewController = self.;
+    [self.window addSubview:_loginViewController.view];
     [self.window makeKeyAndVisible];
     return YES;
 }
@@ -75,6 +78,7 @@
     [__managedObjectModel release];
     [__persistentStoreCoordinator release];
     [_loginViewController release];
+    [_tabBarController release];
     [super dealloc];
 }
 
