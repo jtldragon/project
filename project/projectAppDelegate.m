@@ -29,7 +29,6 @@
     // Override point for customization after application launch.
     // Add the login view controller's view to the window and display.
     _loginViewController=[[LoginViewController alloc]initWithNibName:@"LoginViewController" bundle:nil];
-    //self.window.rootViewController = self.;
     [self.window addSubview:_loginViewController.view];
     [self.window makeKeyAndVisible];
     return YES;
@@ -156,8 +155,25 @@
     {
         return __persistentStoreCoordinator;
     }
+    //change the sqlite store location
+    NSLog(@"location==%@",[self applicationDocumentsDirectory]);
+     NSURL *storeURL = [[self applicationDocumentsDirectory] URLByAppendingPathComponent:@"project.sqlite"];
     
-    NSURL *storeURL = [[self applicationDocumentsDirectory] URLByAppendingPathComponent:@"project.sqlite"];
+    //NSString *storePath = [[self applicationDocumentsDirectory] stringByAppendingPathComponent: @"project.sqlite"];
+    //NSURL *storeURL = [NSURL fileURLWithPath:storePath];
+    // Put down default db if it doesn't already exist
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    if (![fileManager fileExistsAtPath:[NSString stringWithFormat:@"%@",storeURL]]) {
+        NSString *defaultStorePath = [[NSBundle mainBundle]
+                                      pathForResource:@"project" ofType:@"sqlite"];
+        if (defaultStorePath) {
+            [fileManager copyItemAtPath:defaultStorePath toPath:[NSString stringWithFormat:@"%@",storeURL] error:NULL];
+        }
+    }
+    
+
+    
+   
     
     NSError *error = nil;
     __persistentStoreCoordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:[self managedObjectModel]];
