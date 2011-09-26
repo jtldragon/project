@@ -166,7 +166,9 @@
 
     
     
-        
+    //set the studentnumber in delegate
+    delegate.studentNumber=studentNumber;
+    NSLog(@"delegate. studentno=%@",delegate.studentNumber);
     [delegate.window addSubview:delegate.tabBarController.view];
 }
 - (IBAction)textFieldDoneEditing:(id)sender

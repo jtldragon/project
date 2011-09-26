@@ -24,6 +24,8 @@
 
 @synthesize tabBarController=_tabBarController;
 
+@synthesize studentNumber;
+
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Override point for customization after application launch.
@@ -78,6 +80,7 @@
     [__persistentStoreCoordinator release];
     [_loginViewController release];
     [_tabBarController release];
+    [studentNumber release];
     [super dealloc];
 }
 

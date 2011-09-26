@@ -8,8 +8,10 @@
 
 #import "TimetableViewController.h"
 
-
 @implementation TimetableViewController
+
+
+@synthesize resultButton,datePicker;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -23,6 +25,8 @@
 - (void)dealloc
 {
     [super dealloc];
+    [resultButton release];
+    [datePicker release];
 }
 
 - (void)didReceiveMemoryWarning
@@ -39,6 +43,9 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    
+    
+   
 }
 
 - (void)viewDidUnload
@@ -52,6 +59,17 @@
 {
     // Return YES for supported orientations
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
+}
+
+//when user click the 'result' button, the table view flip out.
+-(IBAction)getTimetable:(id)sender{
+    NSDateFormatter *format = [[NSDateFormatter alloc] init];
+    [format setDateFormat:@"yyyy-mm-dd"];
+    
+    NSDate *selectDate = datePicker.date;
+    
+    NSString *dateString = [format stringFromDate:selectDate];
+    NSLog( @"picks %@",dateString);
 }
 
 @end
