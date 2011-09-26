@@ -47,9 +47,9 @@
     
     // Create a fresh fetched results controller
     NSFetchedResultsController *fetched = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest 
-                                                                              managedObjectContext:_context 
-                                                                                sectionNameKeyPath:nil
-                                                                                        cacheName:nil];
+        managedObjectContext:_context 
+          sectionNameKeyPath:nil
+                  cacheName:nil];
     
    // NSLog(@"fetctede cout =%@",[fetched.fetchedObjects count] );
     self.fetchedResultsController = fetched;
@@ -169,6 +169,9 @@
     //set the studentnumber in delegate
     delegate.studentNumber=studentNumber;
     NSLog(@"delegate. studentno=%@",delegate.studentNumber);
+    //remove the loginview from main window
+    for (UIView *view in [delegate.window subviews]) { [view removeFromSuperview]; }
+    //add the timetable view to main window
     [delegate.window addSubview:delegate.tabBarController.view];
 }
 - (IBAction)textFieldDoneEditing:(id)sender

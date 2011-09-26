@@ -13,13 +13,16 @@
     IBOutlet UIDatePicker *datePicker;
     IBOutlet UIBarButtonItem *resultButton;
     
+    
+    
 }
 
--(IBAction)getTimetable:(id)sender;
+-(IBAction)getResultView:(id)sender;
 
 
 @property(nonatomic,retain) IBOutlet UIDatePicker *datePicker;
 @property(nonatomic,retain) IBOutlet UIBarButtonItem *resultButton;
+@property(nonatomic,assign) BOOL isInResultMode;
 
 
 @end

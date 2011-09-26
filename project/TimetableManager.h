@@ -15,7 +15,9 @@
     NSArray *tablesArray;
 }
 
-+ (TimetableManager *)sharedPropertyManager;
++ (TimetableManager *)sharedTimetableManager;
+
+- (void) performTimetableSearch:(NSDictionary *) params;
 
 @property (nonatomic, retain) NSArray *tablesArray;
 
