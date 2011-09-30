@@ -9,7 +9,7 @@
 #import "NotesViewController.h"
 #import "Courses.h"
 #import "NewCourseViewController.h"
-
+#import "TimetableConnect.h"
 
 @implementation NotesViewController
 
@@ -107,6 +107,12 @@
     delegate=[[[UIApplication sharedApplication]delegate]retain];
     //self.navigationItem.rightBarButtonItem=self
     self.navigationItem.leftBarButtonItem=[[[UIBarButtonItem alloc]initWithTitle:@"Add" style:UIBarButtonItemStylePlain target:self action:@selector(add)]autorelease];
+    
+    //generate date string
+    NSString *dateString = @"2010-03-02";
+    NSArray *array=[[NSArray alloc]initWithObjects:delegate.studentNumber,dateString,@"1", nil];
+    TimetableConnect *conn=[[TimetableConnect alloc]initWithParams:array];
+    [conn makeRequest];
 }
 -(void)add {
     //this is learnt from RMIT Property app
