@@ -11,12 +11,14 @@
 
 @interface projectAppDelegate : NSObject <UIApplicationDelegate> {
     NSString *studentNumber;
+    
 
 }
 
 @property (nonatomic, retain) IBOutlet UIWindow *window;
 @property (nonatomic, retain) IBOutlet LoginViewController *loginViewController;
 @property (nonatomic, retain) IBOutlet UITabBarController *tabBarController;
+@property (nonatomic ,retain) IBOutlet UINavigationController *navigationController;
 @property (nonatomic ,retain) NSString *studentNumber;
 
 @property (nonatomic, retain, readonly) NSManagedObjectContext *managedObjectContext;

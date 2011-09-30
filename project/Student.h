@@ -2,8 +2,8 @@
 //  Student.h
 //  project
 //
-//  Created by Yeshu Liu on 23/09/11.
-//  Copyright 2011 RMIT. All rights reserved.
+//  Created by Yeshu Liu on 27/09/11.
+//  Copyright (c) 2011 RMIT. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
@@ -11,11 +11,8 @@
 
 
 @interface Student : NSManagedObject {
-    NSString *studentno;
-   //NSDate *date;
-    
+@private
 }
-@property(nonatomic,retain)NSString *studentno;
-//@property(nonatomic,retain)NSDate *date;
+@property (nonatomic, retain) NSString * studentno;
 
 @end

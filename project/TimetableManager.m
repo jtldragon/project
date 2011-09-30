@@ -44,11 +44,11 @@
     NSMutableArray *newProperties = [NSMutableArray array];
     for (NSDictionary *dict in propertiesArray)
     {
-        Property *property = [Property propertyWithDictionary:dict];
-        [newProperties addObject:property];
+       // Property *property = [Property propertyWithDictionary:dict];
+       // [newProperties addObject:property];
     }
     
-    self.properties = newProperties;
+   // self.properties = newProperties;
 }
 
 

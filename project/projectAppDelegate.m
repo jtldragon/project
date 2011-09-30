@@ -24,6 +24,8 @@
 
 @synthesize tabBarController=_tabBarController;
 
+@synthesize navigationController=_navigationController;
+
 @synthesize studentNumber;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
@@ -33,6 +35,7 @@
     _loginViewController=[[LoginViewController alloc]initWithNibName:@"LoginViewController" bundle:nil];
     [self.window addSubview:_loginViewController.view];
     [self.window makeKeyAndVisible];
+    //_navigationController=[[UINavigationController alloc]init];
     return YES;
 }
 
@@ -80,6 +83,7 @@
     [__persistentStoreCoordinator release];
     [_loginViewController release];
     [_tabBarController release];
+    [_navigationController release];
     [studentNumber release];
     [super dealloc];
 }

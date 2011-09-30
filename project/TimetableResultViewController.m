@@ -104,7 +104,7 @@
     Timetable *timetable = [self.tablesArray objectAtIndex:indexPath.row];
     
     
-    [TimetableManager sharedPropertyManager].selectedProperty = property;
+    //[TimetableManager sharedPropertyManager].selectedProperty = property;
     
     
 }
