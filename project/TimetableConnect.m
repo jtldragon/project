@@ -64,6 +64,7 @@
 - (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data  {
     NSLog(@"接收完数据:");
     [jsonData appendData:data];
+    NSLog(@"%@",jsonData);
 }
 - (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error  {
     NSLog(@"数据接收错误:%@",error);

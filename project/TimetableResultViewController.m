@@ -8,7 +8,7 @@
 
 #import "TimetableResultViewController.h"
 #import "Timetable.h"
-#import "TimetableManager.h"
+
 
 
 @implementation TimetableResultViewController
@@ -123,7 +123,7 @@
     [params setValue:date forKey:@"date"];
     
     
-    [[TimetableManager sharedPropertyManager] performTimetableSearch:params];
+    //[[TimetableManager sharedPropertyManager] performTimetableSearch:params];
 }
 
 
