@@ -10,16 +10,17 @@
 
 
 @interface NotesViewController : UITableViewController <NSFetchedResultsControllerDelegate> {
-    NSArray *coursesArray;
+    NSMutableArray *coursesArray;
     NSUInteger selectedCellIndex;
     projectAppDelegate *delegate;
     NSFetchedResultsController *_fetchResultsController;
 }
 
-@property (nonatomic, retain) NSArray *coursesArray;
+@property (nonatomic, retain) NSMutableArray *coursesArray;
 @property (nonatomic, assign) NSUInteger selectedCellIndex;
 @property(nonatomic, retain) NSFetchedResultsController *fetchedResultsController;
 
 - (IBAction)search;
 -(IBAction)add;
+
 @end

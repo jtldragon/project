@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		55252DBA14357B15003885EE /* TimetableConnect.m in Sources */ = {isa = PBXBuildFile; fileRef = 55252DB914357B15003885EE /* TimetableConnect.m */; };
+		55252E581435CA74003885EE /* YAJLiOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55252E571435CA74003885EE /* YAJLiOS.framework */; };
 		553E333A142B39E7003E4791 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 553E3339142B39E7003E4791 /* UIKit.framework */; };
 		553E333C142B39E7003E4791 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 553E333B142B39E7003E4791 /* Foundation.framework */; };
 		553E333E142B39E7003E4791 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 553E333D142B39E7003E4791 /* CoreGraphics.framework */; };
@@ -25,19 +27,32 @@
 		553E3369142B39E7003E4791 /* projectTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 553E3368142B39E7003E4791 /* projectTests.m */; };
 		553E3375142B3A1D003E4791 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 553E3373142B3A1D003E4791 /* LoginViewController.m */; };
 		553E3376142B3A1D003E4791 /* LoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 553E3374142B3A1D003E4791 /* LoginViewController.xib */; };
-		553E3379142B3A72003E4791 /* rmit.png in Resources */ = {isa = PBXBuildFile; fileRef = 553E3378142B3A72003E4791 /* rmit.png */; };
 		553E33BB142B428D003E4791 /* TimetableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 553E33B9142B428D003E4791 /* TimetableViewController.m */; };
 		553E33BC142B428D003E4791 /* TimetableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 553E33BA142B428D003E4791 /* TimetableViewController.xib */; };
 		553E33C2142B62DE003E4791 /* LocationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 553E33C0142B62DE003E4791 /* LocationViewController.m */; };
 		553E33C3142B62DE003E4791 /* LocationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 553E33C1142B62DE003E4791 /* LocationViewController.xib */; };
 		553E33C8142B631A003E4791 /* BookmarkViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 553E33C6142B631A003E4791 /* BookmarkViewController.m */; };
 		553E33C9142B631A003E4791 /* BookmarkViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 553E33C7142B631A003E4791 /* BookmarkViewController.xib */; };
-		553E33CF142B6C9C003E4791 /* timetable.png in Resources */ = {isa = PBXBuildFile; fileRef = 553E33CE142B6C9C003E4791 /* timetable.png */; };
-		553E33D1142B6CD9003E4791 /* location.png in Resources */ = {isa = PBXBuildFile; fileRef = 553E33D0142B6CD9003E4791 /* location.png */; };
-		55BAA3841430695800381209 /* Student.m in Sources */ = {isa = PBXBuildFile; fileRef = 55BAA3831430695800381209 /* Student.m */; };
+		5556CD771437388B00ECD05F /* TimetableManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 5556CD761437388B00ECD05F /* TimetableManager.m */; };
+		5556CD79143738DD00ECD05F /* LRResty.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5556CD78143738DD00ECD05F /* LRResty.framework */; };
+		5556CD7C1437552D00ECD05F /* LocationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 5556CD7B1437552D00ECD05F /* LocationManager.m */; };
+		5556CD921437917100ECD05F /* Location.m in Sources */ = {isa = PBXBuildFile; fileRef = 5556CD911437917100ECD05F /* Location.m */; };
+		5556CDAB1437A3DD00ECD05F /* LocationDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5556CDA91437A3DD00ECD05F /* LocationDetailViewController.m */; };
+		5556CDAC1437A3DD00ECD05F /* LocationDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5556CDAA1437A3DD00ECD05F /* LocationDetailViewController.xib */; };
+		5563AC0714318ED100656924 /* NewCourseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5563AC0514318ED100656924 /* NewCourseViewController.m */; };
+		5563AC0814318ED100656924 /* NewCourseViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5563AC0614318ED100656924 /* NewCourseViewController.xib */; };
+		5580D8AE1431BBD40020D599 /* NotesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5580D8AC1431BBD30020D599 /* NotesViewController.m */; };
+		5580D8AF1431BBD40020D599 /* NotesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5580D8AD1431BBD30020D599 /* NotesViewController.xib */; };
+		5580D8B21431CBB00020D599 /* Notes.m in Sources */ = {isa = PBXBuildFile; fileRef = 5580D8B11431CBAF0020D599 /* Notes.m */; };
+		5580D8B51431CBB10020D599 /* Student.m in Sources */ = {isa = PBXBuildFile; fileRef = 5580D8B41431CBB10020D599 /* Student.m */; };
+		5580D8B81431CBB20020D599 /* Courses.m in Sources */ = {isa = PBXBuildFile; fileRef = 5580D8B71431CBB20020D599 /* Courses.m */; };
 		55BAA3881430699A00381209 /* TimetableResultViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 55BAA3861430699A00381209 /* TimetableResultViewController.m */; };
 		55BAA3891430699A00381209 /* TimetableResultViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55BAA3871430699A00381209 /* TimetableResultViewController.xib */; };
 		55BAA38C143069B300381209 /* Timetable.m in Sources */ = {isa = PBXBuildFile; fileRef = 55BAA38B143069B300381209 /* Timetable.m */; };
+		55BAA39914306ED200381209 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55BAA39814306ED200381209 /* MapKit.framework */; };
+		55BAA3FE1430714600381209 /* rmit.png in Resources */ = {isa = PBXBuildFile; fileRef = 55BAA3FD1430714600381209 /* rmit.png */; };
+		55BAA4001430714E00381209 /* location.png in Resources */ = {isa = PBXBuildFile; fileRef = 55BAA3FF1430714E00381209 /* location.png */; };
+		55BAA4021430715900381209 /* timetable.png in Resources */ = {isa = PBXBuildFile; fileRef = 55BAA4011430715900381209 /* timetable.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +66,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		55252DB814357B15003885EE /* TimetableConnect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TimetableConnect.h; sourceTree = "<group>"; };
+		55252DB914357B15003885EE /* TimetableConnect.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TimetableConnect.m; sourceTree = "<group>"; };
+		55252E571435CA74003885EE /* YAJLiOS.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = YAJLiOS.framework; path = framework/YAJLiOS.framework; sourceTree = "<group>"; };
 		553E3335142B39E7003E4791 /* project.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = project.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		553E3339142B39E7003E4791 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		553E333B142B39E7003E4791 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -73,7 +91,6 @@
 		553E3372142B3A1D003E4791 /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
 		553E3373142B3A1D003E4791 /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
 		553E3374142B3A1D003E4791 /* LoginViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoginViewController.xib; sourceTree = "<group>"; };
-		553E3378142B3A72003E4791 /* rmit.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = rmit.png; path = ../../../../Pictures/rmit.png; sourceTree = "<group>"; };
 		553E33B8142B428D003E4791 /* TimetableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TimetableViewController.h; sourceTree = "<group>"; };
 		553E33B9142B428D003E4791 /* TimetableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TimetableViewController.m; sourceTree = "<group>"; };
 		553E33BA142B428D003E4791 /* TimetableViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TimetableViewController.xib; sourceTree = "<group>"; };
@@ -83,15 +100,38 @@
 		553E33C5142B631A003E4791 /* BookmarkViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BookmarkViewController.h; sourceTree = "<group>"; };
 		553E33C6142B631A003E4791 /* BookmarkViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BookmarkViewController.m; sourceTree = "<group>"; };
 		553E33C7142B631A003E4791 /* BookmarkViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BookmarkViewController.xib; sourceTree = "<group>"; };
-		553E33CE142B6C9C003E4791 /* timetable.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = timetable.png; path = "../../../../Pictures/resource/glyphish-icons/icons/timetable.png"; sourceTree = "<group>"; };
-		553E33D0142B6CD9003E4791 /* location.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = location.png; path = "../../../../Pictures/resource/glyphish-icons/icons/location.png"; sourceTree = "<group>"; };
-		55BAA3821430694D00381209 /* Student.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Student.h; sourceTree = "<group>"; };
-		55BAA3831430695800381209 /* Student.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Student.m; sourceTree = "<group>"; };
+		5556CD751437388B00ECD05F /* TimetableManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TimetableManager.h; sourceTree = "<group>"; };
+		5556CD761437388B00ECD05F /* TimetableManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TimetableManager.m; sourceTree = "<group>"; };
+		5556CD78143738DD00ECD05F /* LRResty.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = LRResty.framework; path = framework/LRResty.framework; sourceTree = "<group>"; };
+		5556CD7A1437552D00ECD05F /* LocationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocationManager.h; sourceTree = "<group>"; };
+		5556CD7B1437552D00ECD05F /* LocationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocationManager.m; sourceTree = "<group>"; };
+		5556CD8D143770B500ECD05F /* LocationDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocationDelegate.h; sourceTree = "<group>"; };
+		5556CD901437917100ECD05F /* Location.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Location.h; sourceTree = "<group>"; };
+		5556CD911437917100ECD05F /* Location.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Location.m; sourceTree = "<group>"; };
+		5556CDA81437A3DC00ECD05F /* LocationDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocationDetailViewController.h; sourceTree = "<group>"; };
+		5556CDA91437A3DD00ECD05F /* LocationDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocationDetailViewController.m; sourceTree = "<group>"; };
+		5556CDAA1437A3DD00ECD05F /* LocationDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LocationDetailViewController.xib; sourceTree = "<group>"; };
+		5563AC0414318ED100656924 /* NewCourseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewCourseViewController.h; sourceTree = "<group>"; };
+		5563AC0514318ED100656924 /* NewCourseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewCourseViewController.m; sourceTree = "<group>"; };
+		5563AC0614318ED100656924 /* NewCourseViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NewCourseViewController.xib; sourceTree = "<group>"; };
+		5580D8AB1431BBD30020D599 /* NotesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NotesViewController.h; sourceTree = "<group>"; };
+		5580D8AC1431BBD30020D599 /* NotesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NotesViewController.m; sourceTree = "<group>"; };
+		5580D8AD1431BBD30020D599 /* NotesViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NotesViewController.xib; sourceTree = "<group>"; };
+		5580D8B01431CBAF0020D599 /* Notes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Notes.h; sourceTree = "<group>"; };
+		5580D8B11431CBAF0020D599 /* Notes.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Notes.m; sourceTree = "<group>"; };
+		5580D8B31431CBB10020D599 /* Student.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Student.h; sourceTree = "<group>"; };
+		5580D8B41431CBB10020D599 /* Student.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Student.m; sourceTree = "<group>"; };
+		5580D8B61431CBB10020D599 /* Courses.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Courses.h; sourceTree = "<group>"; };
+		5580D8B71431CBB20020D599 /* Courses.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Courses.m; sourceTree = "<group>"; };
 		55BAA3851430699A00381209 /* TimetableResultViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TimetableResultViewController.h; sourceTree = "<group>"; };
 		55BAA3861430699A00381209 /* TimetableResultViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TimetableResultViewController.m; sourceTree = "<group>"; };
 		55BAA3871430699A00381209 /* TimetableResultViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TimetableResultViewController.xib; sourceTree = "<group>"; };
 		55BAA38A143069B300381209 /* Timetable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Timetable.h; sourceTree = "<group>"; };
 		55BAA38B143069B300381209 /* Timetable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Timetable.m; sourceTree = "<group>"; };
+		55BAA39814306ED200381209 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		55BAA3FD1430714600381209 /* rmit.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = rmit.png; sourceTree = "<group>"; };
+		55BAA3FF1430714E00381209 /* location.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = location.png; sourceTree = "<group>"; };
+		55BAA4011430715900381209 /* timetable.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = timetable.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,6 +139,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5556CD79143738DD00ECD05F /* LRResty.framework in Frameworks */,
+				55252E581435CA74003885EE /* YAJLiOS.framework in Frameworks */,
+				55BAA39914306ED200381209 /* MapKit.framework in Frameworks */,
 				553E333A142B39E7003E4791 /* UIKit.framework in Frameworks */,
 				553E333C142B39E7003E4791 /* Foundation.framework in Frameworks */,
 				553E333E142B39E7003E4791 /* CoreGraphics.framework in Frameworks */,
@@ -144,6 +187,9 @@
 		553E3338142B39E7003E4791 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				5556CD78143738DD00ECD05F /* LRResty.framework */,
+				55252E571435CA74003885EE /* YAJLiOS.framework */,
+				55BAA39814306ED200381209 /* MapKit.framework */,
 				553E3339142B39E7003E4791 /* UIKit.framework */,
 				553E333B142B39E7003E4791 /* Foundation.framework */,
 				553E333D142B39E7003E4791 /* CoreGraphics.framework */,
@@ -155,15 +201,21 @@
 		553E3341142B39E7003E4791 /* project */ = {
 			isa = PBXGroup;
 			children = (
-				55BAA3801430692700381209 /* Classes */,
+				55BAA3801430692700381209 /* Models */,
 				553E33C4142B62E5003E4791 /* BookmarkView */,
 				553E33BE142B42F4003E4791 /* LocationView */,
 				553E33BD142B4294003E4791 /* TimetableView */,
 				553E337A142B3A7A003E4791 /* LoginView */,
-				553E334A142B39E7003E4791 /* projectAppDelegate.h */,
 				553E334B142B39E7003E4791 /* projectAppDelegate.m */,
+				553E334A142B39E7003E4791 /* projectAppDelegate.h */,
 				553E334D142B39E7003E4791 /* MainWindow.xib */,
 				553E3350142B39E7003E4791 /* project.xcdatamodeld */,
+				5580D8B61431CBB10020D599 /* Courses.h */,
+				5580D8B71431CBB20020D599 /* Courses.m */,
+				5580D8B31431CBB10020D599 /* Student.h */,
+				5580D8B41431CBB10020D599 /* Student.m */,
+				5580D8B01431CBAF0020D599 /* Notes.h */,
+				5580D8B11431CBAF0020D599 /* Notes.m */,
 			);
 			path = project;
 			sourceTree = "<group>";
@@ -203,9 +255,9 @@
 		553E3377142B3A4A003E4791 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				553E33D0142B6CD9003E4791 /* location.png */,
-				553E33CE142B6C9C003E4791 /* timetable.png */,
-				553E3378142B3A72003E4791 /* rmit.png */,
+				55BAA4011430715900381209 /* timetable.png */,
+				55BAA3FF1430714E00381209 /* location.png */,
+				55BAA3FD1430714600381209 /* rmit.png */,
 			);
 			name = Resources;
 			path = project;
@@ -240,6 +292,9 @@
 				553E33BF142B62DE003E4791 /* LocationViewController.h */,
 				553E33C0142B62DE003E4791 /* LocationViewController.m */,
 				553E33C1142B62DE003E4791 /* LocationViewController.xib */,
+				5556CDA81437A3DC00ECD05F /* LocationDetailViewController.h */,
+				5556CDA91437A3DD00ECD05F /* LocationDetailViewController.m */,
+				5556CDAA1437A3DD00ECD05F /* LocationDetailViewController.xib */,
 			);
 			name = LocationView;
 			sourceTree = "<group>";
@@ -250,19 +305,32 @@
 				553E33C5142B631A003E4791 /* BookmarkViewController.h */,
 				553E33C6142B631A003E4791 /* BookmarkViewController.m */,
 				553E33C7142B631A003E4791 /* BookmarkViewController.xib */,
+				5563AC0414318ED100656924 /* NewCourseViewController.h */,
+				5563AC0514318ED100656924 /* NewCourseViewController.m */,
+				5563AC0614318ED100656924 /* NewCourseViewController.xib */,
+				5580D8AB1431BBD30020D599 /* NotesViewController.h */,
+				5580D8AC1431BBD30020D599 /* NotesViewController.m */,
+				5580D8AD1431BBD30020D599 /* NotesViewController.xib */,
 			);
 			name = BookmarkView;
 			sourceTree = "<group>";
 		};
-		55BAA3801430692700381209 /* Classes */ = {
+		55BAA3801430692700381209 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				55BAA3821430694D00381209 /* Student.h */,
-				55BAA3831430695800381209 /* Student.m */,
 				55BAA38A143069B300381209 /* Timetable.h */,
 				55BAA38B143069B300381209 /* Timetable.m */,
+				55252DB814357B15003885EE /* TimetableConnect.h */,
+				55252DB914357B15003885EE /* TimetableConnect.m */,
+				5556CD751437388B00ECD05F /* TimetableManager.h */,
+				5556CD761437388B00ECD05F /* TimetableManager.m */,
+				5556CD7A1437552D00ECD05F /* LocationManager.h */,
+				5556CD7B1437552D00ECD05F /* LocationManager.m */,
+				5556CD8D143770B500ECD05F /* LocationDelegate.h */,
+				5556CD901437917100ECD05F /* Location.h */,
+				5556CD911437917100ECD05F /* Location.m */,
 			);
-			name = Classes;
+			name = Models;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -338,13 +406,16 @@
 				553E3346142B39E7003E4791 /* InfoPlist.strings in Resources */,
 				553E334F142B39E7003E4791 /* MainWindow.xib in Resources */,
 				553E3376142B3A1D003E4791 /* LoginViewController.xib in Resources */,
-				553E3379142B3A72003E4791 /* rmit.png in Resources */,
 				553E33BC142B428D003E4791 /* TimetableViewController.xib in Resources */,
 				553E33C3142B62DE003E4791 /* LocationViewController.xib in Resources */,
 				553E33C9142B631A003E4791 /* BookmarkViewController.xib in Resources */,
-				553E33CF142B6C9C003E4791 /* timetable.png in Resources */,
-				553E33D1142B6CD9003E4791 /* location.png in Resources */,
 				55BAA3891430699A00381209 /* TimetableResultViewController.xib in Resources */,
+				55BAA3FE1430714600381209 /* rmit.png in Resources */,
+				55BAA4001430714E00381209 /* location.png in Resources */,
+				55BAA4021430715900381209 /* timetable.png in Resources */,
+				5563AC0814318ED100656924 /* NewCourseViewController.xib in Resources */,
+				5580D8AF1431BBD40020D599 /* NotesViewController.xib in Resources */,
+				5556CDAC1437A3DD00ECD05F /* LocationDetailViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -387,9 +458,18 @@
 				553E33BB142B428D003E4791 /* TimetableViewController.m in Sources */,
 				553E33C2142B62DE003E4791 /* LocationViewController.m in Sources */,
 				553E33C8142B631A003E4791 /* BookmarkViewController.m in Sources */,
-				55BAA3841430695800381209 /* Student.m in Sources */,
 				55BAA3881430699A00381209 /* TimetableResultViewController.m in Sources */,
 				55BAA38C143069B300381209 /* Timetable.m in Sources */,
+				5563AC0714318ED100656924 /* NewCourseViewController.m in Sources */,
+				5580D8AE1431BBD40020D599 /* NotesViewController.m in Sources */,
+				5580D8B21431CBB00020D599 /* Notes.m in Sources */,
+				5580D8B51431CBB10020D599 /* Student.m in Sources */,
+				5580D8B81431CBB20020D599 /* Courses.m in Sources */,
+				55252DBA14357B15003885EE /* TimetableConnect.m in Sources */,
+				5556CD771437388B00ECD05F /* TimetableManager.m in Sources */,
+				5556CD7C1437552D00ECD05F /* LocationManager.m in Sources */,
+				5556CD921437917100ECD05F /* Location.m in Sources */,
+				5556CDAB1437A3DD00ECD05F /* LocationDetailViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -452,7 +532,13 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				LD_RUNPATH_SEARCH_PATHS = "@loader_path/../Frameworks";
+				OTHER_LDFLAGS = (
+					"-all_load",
+					"-Objc",
+				);
 				SDKROOT = iphoneos;
+				USER_HEADER_SEARCH_PATHS = "$(BUILT_PRODUCTS_DIR)/** @loader_path/../Frameworks/**";
 			};
 			name = Debug;
 		};
@@ -466,8 +552,14 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				LD_RUNPATH_SEARCH_PATHS = "@loader_path/../Frameworks";
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				OTHER_LDFLAGS = (
+					"-all_load",
+					"-Objc",
+				);
 				SDKROOT = iphoneos;
+				USER_HEADER_SEARCH_PATHS = "$(BUILT_PRODUCTS_DIR)/**";
 			};
 			name = Release;
 		};
@@ -476,11 +568,23 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				COPY_PHASE_STRIP = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/../../../Downloads/sgleadow-property-search-sample-e88c700\"",
+					"\"$(SRCROOT)\"",
+					"\"$(SRCROOT)/framework\"",
+				);
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "project/project-Prefix.pch";
 				INFOPLIST_FILE = "project/project-Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "@loader_path/../framework";
+				OTHER_LDFLAGS = (
+					"-all_load",
+					"-Objc",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				USER_HEADER_SEARCH_PATHS = "$(BUILT_PRODUCTS_DIR)/**";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -490,10 +594,22 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				COPY_PHASE_STRIP = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/../../../Downloads/sgleadow-property-search-sample-e88c700\"",
+					"\"$(SRCROOT)\"",
+					"\"$(SRCROOT)/framework\"",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "project/project-Prefix.pch";
 				INFOPLIST_FILE = "project/project-Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "@loader_path/../framework";
+				OTHER_LDFLAGS = (
+					"-all_load",
+					"-Objc",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				USER_HEADER_SEARCH_PATHS = "$(BUILT_PRODUCTS_DIR)/**";
 				VALIDATE_PRODUCT = YES;
 				WRAPPER_EXTENSION = app;
 			};

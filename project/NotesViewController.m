@@ -10,6 +10,7 @@
 #import "Courses.h"
 #import "NewCourseViewController.h"
 #import "TimetableConnect.h"
+#import "TimetableManager.h"
 
 @implementation NotesViewController
 
@@ -33,7 +34,7 @@
     [fetchRequest setSortDescriptors:[NSArray arrayWithObject:descriptor]];
     
     NSError *error;
-    coursesArray=[[NSArray alloc]initWithArray:[delegate.managedObjectContext executeFetchRequest:fetchRequest error:&error]];
+    //coursesArray=[[NSArray alloc]initWithArray:[delegate.managedObjectContext executeFetchRequest:fetchRequest error:&error]];
     
     //  NSLog(@"%@ records found.",[resultSet count]);
     /* for(NSManagedObject *a in resultSet){
@@ -72,16 +73,24 @@
     self = [super initWithStyle:style];
     if (self) {
         // Custom initialization
+        //Add observers to the property manager 
+        [[TimetableManager sharedTimetableManager] addObserver:self 
+                                                  forKeyPath:@"timetables" 
+                                                     options:(NSKeyValueObservingOptionNew) 
+                                                     context:nil];
+
     }
     return self;
 }
 
 - (void)dealloc
 {
-    [super dealloc];
+    [[TimetableManager sharedTimetableManager]removeObserver:self forKeyPath:@"timetables"];
     [coursesArray release];
     // [tableView release];
     [delegate release];
+    [super dealloc];
+    
 }
 
 - (void)didReceiveMemoryWarning
@@ -110,9 +119,50 @@
     
     //generate date string
     NSString *dateString = @"2010-03-02";
-    NSArray *array=[[NSArray alloc]initWithObjects:delegate.studentNumber,dateString,@"1", nil];
+    NSArray *array=[[NSArray alloc]initWithObjects:delegate.studentNumber,dateString,@"7", nil];
+    [[TimetableManager sharedTimetableManager]performSearch:[[NSDictionary alloc]initWithObjects:array forKeys:[[NSArray alloc]initWithObjects:@"studentId",@"date",@"additionalDays", nil]]];
+    /*
     TimetableConnect *conn=[[TimetableConnect alloc]initWithParams:array];
     [conn makeRequest];
+    NSMutableArray *timesArray=[[NSMutableArray alloc]initWithArray:conn.timetablesArray];
+    NSLog(@"times count=%i",[timesArray count]);
+    NSMutableArray *lecturesArray=[[NSMutableArray alloc]init];
+    for (NSDictionary *dict in timesArray) {
+        NSLog(@"%@\n ",dict);
+        if ([[dict valueForKey:@"activityType"] isEqualToString:@"Lecture"]) {
+            NSString *title=[dict valueForKey:@"title"];
+            //check whether there is a duplicate
+            if ([lecturesArray count]==0) {
+                [lecturesArray addObject:title];
+            }
+            else {
+                BOOL addflag=YES;
+                //check whether there is a duplicate
+                for (int i=0; i<[lecturesArray count];i++ ) {
+                    NSString *a=[lecturesArray objectAtIndex:i];
+                    if ([a isEqualToString:title]) {
+                        addflag=NO;
+                    }
+                }
+                if (addflag) {
+                    [lecturesArray addObject:title];
+                }
+                
+            }
+            
+        }
+    }
+    
+    for (NSString *s in lecturesArray) {
+        NSLog(@"%@\n",s);
+    }
+    NSLog(@"count=%i",[conn.lectures count]);
+    coursesArray=[[NSMutableArray alloc]initWithArray:lecturesArray];
+     */
+    
+    NSLog(@"array count in view did load=%i",[coursesArray count]);
+    
+    
 }
 -(void)add {
     //this is learnt from RMIT Property app

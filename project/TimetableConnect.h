@@ -12,7 +12,10 @@
     NSArray *timeParams;
     NSString *urlString;
     NSURLConnection *connection;
-    NSMutableData *jsonData;
+    NSMutableArray *timetablesArray;
+    NSMutableArray *lectures;
+    BOOL connIsFin;
+    
     
 }
 
@@ -20,11 +23,14 @@
 -(void)dealloc;
 -(NSString *)description;
 -(void)makeRequest;
+-(NSMutableArray *)getLectures;
 
 @property (nonatomic,retain)NSArray *timeParams;
 @property (nonatomic,retain)NSString *urlString;
 @property (nonatomic,retain)NSURLConnection *connection;
-@property (nonatomic,retain)NSMutableData *jsonData;
+@property (nonatomic,retain)NSMutableArray *timetablesArray;
+@property (nonatomic,retain)NSMutableArray *lectures;
+@property (nonatomic,assign)BOOL connIsFin;
 
 
 
