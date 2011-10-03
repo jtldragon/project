@@ -8,19 +8,28 @@
 
 #import <UIKit/UIKit.h>
 #import "Location.h"
+#import <MapKit/MapKit.h>
+//#import <CoreLocation/CoreLocation.h>
 
 
-@interface LocationDetailViewController : UIViewController
+
+@interface LocationDetailViewController : UIViewController <MKMapViewDelegate,CLLocationManagerDelegate> {
+    
+}
 
 -(id)initWithLocation:(Location *)loc;
     
 
 @property (nonatomic, retain)Location *location;
-@property (nonatomic, retain) IBOutlet UILabel *label_;
-@property (nonatomic, retain) IBOutlet UILabel *location;
-@property (nonatomic, retain) IBOutlet UIImageView *photo;
-@property (nonatomic, retain) IBOutlet UILabel *summary;
-@property (nonatomic, retain) IBOutlet UILabel *description;
+@property (nonatomic, retain) IBOutlet UILabel *label_campus;
+@property (nonatomic, retain) IBOutlet UILabel *label_bNo;
+@property (nonatomic, retain) IBOutlet UILabel *label_contact;
+@property (nonatomic, retain) IBOutlet MKMapView *mapView;
+@property (nonatomic, assign) BOOL isInMapMode;
+@property (nonatomic, retain) IBOutlet UIBarButtonItem *mapButton;
+//@property (nonatomic, retain) CLLocationManager *locationManager;
+- (IBAction)toggleMapView:(id)sender;
+
 
 
 

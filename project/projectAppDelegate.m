@@ -26,6 +26,8 @@
 
 @synthesize navigationController=_navigationController;
 
+@synthesize locationNaviController,timetableNaviController;
+
 @synthesize studentNumber;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
@@ -83,7 +85,9 @@
     [__persistentStoreCoordinator release];
     [_loginViewController release];
     [_tabBarController release];
+    [timetableNaviController release];
     [_navigationController release];
+    [locationNaviController release];
     [studentNumber release];
     [super dealloc];
 }

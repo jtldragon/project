@@ -37,10 +37,17 @@
 {
     [super dealloc];
 }
-
+-(NSString *)getTime{
+    NSArray *listItems = [startTime componentsSeparatedByString:@" "];
+    NSString *start=[listItems objectAtIndex:1];
+    NSArray *listItemss = [endTime componentsSeparatedByString:@" "];
+    NSString *end=[listItemss objectAtIndex:1];
+    return [NSString stringWithFormat:@"%@-%@",start,end];
+    
+}
 -(NSString *)description
 {
-    return [NSString stringWithFormat:@"Class:%@\n Start From:%@\n To:%@ At:%@\n In:%@\n Type:%@\n",classTitle,startTime,endTime,location,campus,type];
+    return [NSString stringWithFormat:@"At:%@\n In:%@\n Type:%@\n",location,campus,type];
 }
 
 @end

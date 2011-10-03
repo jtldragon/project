@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <MapKit/MapKit.h>
 
-@interface Location : NSObject 
+@interface Location : NSObject  <MKAnnotation>
 
 -(id)initWithDictionary:(NSDictionary *)dict;
 
@@ -27,6 +27,9 @@
 
 
 
+#pragma mark - MKAnnotation Protocol
+
+@property (nonatomic, assign) CLLocationCoordinate2D coordinate;
 
 
 

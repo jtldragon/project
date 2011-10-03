@@ -5,7 +5,7 @@
 //  Created by Yeshu Liu on 22/09/11.
 //  Copyright 2011 RMIT. All rights reserved.
 //
-
+#import "projectAppDelegate.h"
 #import <UIKit/UIKit.h>
 #import <LRResty/LRResty.h>
 
@@ -16,7 +16,6 @@
 @end
 
 @interface LocationViewController : UIViewController <UITableViewDelegate,UITableViewDataSource,LRRestyClientResponseDelegate,LocationDelegate>{
-    //id <LocationDelegate> delegate;
 }
 
 @property (nonatomic,retain)IBOutlet UITextField *textfield;
@@ -26,6 +25,7 @@
 
 @property (nonatomic,retain)NSMutableArray *locations;
 @property (nonatomic,assign)NSUInteger selecedIndex;
+//@property (nonatomic ,retain)UINavigationController *locNaviController;
 
 
 -(IBAction)search;

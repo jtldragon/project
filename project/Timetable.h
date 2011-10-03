@@ -32,6 +32,7 @@
 
 -(void)dealloc;
 -(NSString *)description;
+-(NSString *)getTime;
 
 @property(nonatomic,retain)NSString *classTitle;
 @property(nonatomic,assign)NSString *startTime;

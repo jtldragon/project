@@ -11,7 +11,7 @@
 
 @implementation Location
 
-@synthesize additionalInformation,campus,contactDetails,description,Id,latitude,longitude,name,rmitBuildingNumber;
+@synthesize additionalInformation,campus,contactDetails,description,Id,latitude,longitude,name,rmitBuildingNumber,coordinate;
 
 - (id)initWithDictionary:(NSDictionary *)dict {
     {
@@ -27,6 +27,8 @@
             [self setLongitude:[dict valueForKey:@"longitude"]];
             [self setLatitude:[dict valueForKey:@"latitude"]];
             [self setRmitBuildingNumber:[dict valueForKey:@"rmitBuildingNumber"]];
+        
+            [self setCoordinate:CLLocationCoordinate2DMake([self.latitude doubleValue],[self.longitude doubleValue])];
         }
         return self;
         
@@ -53,7 +55,7 @@
 }
 
 
-/*
+
 #pragma mark -
 #pragma mark MKAnnotation Protocol
 
@@ -61,9 +63,9 @@
 
 -(NSString *)title
 {
-    return self.rmitBuildingNumber;
+    return self.name;
 }
- */
+
 
 @end
 

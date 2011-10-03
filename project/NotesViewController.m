@@ -7,14 +7,16 @@
 //
 
 #import "NotesViewController.h"
+#import <YAJLiOS/YAJL.h>
+#import "MBProgressHUD.h"
 #import "Courses.h"
 #import "NewCourseViewController.h"
-#import "TimetableConnect.h"
-#import "TimetableManager.h"
+@class Timetable;
+
 
 @implementation NotesViewController
 
-@synthesize coursesArray,selectedCellIndex;
+@synthesize lectures,selectedIndex;
 
 @synthesize fetchedResultsController=_fetchResultsController;
 
@@ -60,6 +62,7 @@
     [fetched release];
     [fetchRequest release];
     
+    
     [descriptor release];
     
     //NSLog(@"fected count=%@",[_fetchResultsController.fetchedObjects count]);
@@ -73,11 +76,7 @@
     self = [super initWithStyle:style];
     if (self) {
         // Custom initialization
-        //Add observers to the property manager 
-        [[TimetableManager sharedTimetableManager] addObserver:self 
-                                                  forKeyPath:@"timetables" 
-                                                     options:(NSKeyValueObservingOptionNew) 
-                                                     context:nil];
+        
 
     }
     return self;
@@ -85,9 +84,7 @@
 
 - (void)dealloc
 {
-    [[TimetableManager sharedTimetableManager]removeObserver:self forKeyPath:@"timetables"];
-    [coursesArray release];
-    // [tableView release];
+    [lectures release];
     [delegate release];
     [super dealloc];
     
@@ -106,7 +103,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    NSLog(@"array count in view did load=%i",[coursesArray count]);
+    self.title=@"Notes";
 
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
@@ -117,10 +114,11 @@
     //self.navigationItem.rightBarButtonItem=self
     self.navigationItem.leftBarButtonItem=[[[UIBarButtonItem alloc]initWithTitle:@"Add" style:UIBarButtonItemStylePlain target:self action:@selector(add)]autorelease];
     
-    //generate date string
-    NSString *dateString = @"2010-03-02";
-    NSArray *array=[[NSArray alloc]initWithObjects:delegate.studentNumber,dateString,@"7", nil];
-    [[TimetableManager sharedTimetableManager]performSearch:[[NSDictionary alloc]initWithObjects:array forKeys:[[NSArray alloc]initWithObjects:@"studentId",@"date",@"additionalDays", nil]]];
+    
+    
+    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    hud.labelText = @"Loading lectures...";
+    [self search];
     /*
     TimetableConnect *conn=[[TimetableConnect alloc]initWithParams:array];
     [conn makeRequest];
@@ -160,16 +158,97 @@
     coursesArray=[[NSMutableArray alloc]initWithArray:lecturesArray];
      */
     
-    NSLog(@"array count in view did load=%i",[coursesArray count]);
+   // NSLog(@"array count in view did load=%i",[coursesArray count]);
     
     
 }
+-(void)search {
+    //generate date string
+    NSString *dateString = @"2010-03-02";
+    
+    NSMutableDictionary *params=[NSMutableDictionary dictionary];
+    [params setObject:delegate.studentNumber forKey:@"studentNumber"];
+    [params setObject:dateString forKey:@"date"];
+    [self performSearch:params];
+}
+
+- (void)performSearch:(NSDictionary *)params
+{
+    NSString *urlString=@"";
+    urlString=[NSString stringWithFormat:@"https://announcements.mobile-test.its.rmit.edu.au/studentwebservices/rest/timetable/studentId/%@/date/%@/additionalDays/7",[params objectForKey:@"studentNumber"],[params objectForKey:@"date"]];
+    
+        
+    
+    NSLog(@"%@",urlString);
+    NSDictionary *requestHeaders = [NSDictionary 
+                                    dictionaryWithObject:@"application/json" forKey:@"Accept"];
+    
+    [[LRResty client]get:urlString parameters:nil headers:requestHeaders delegate:self];
+    //return self.locations;
+}
+
+#pragma mark - LRRestyClientResponseDelegate
+
+- (void)restClient:(LRRestyClient *)client receivedResponse:(LRRestyResponse *)response
+{
+    NSLog(@"response==%@",response);
+    if ([response status]==200) {
+        NSData *data = [response responseData];
+        NSDictionary *jsonDictionary = [data yajl_JSON];
+       NSLog(@"%@",jsonDictionary);
+        [self parse:jsonDictionary];
+        // NSArray *locationsArray = [jsonDictionary valueForKey:@"location"];
+        // for (NSDictionary *dict in locationsArray) {
+        //    NSLog(@"dict %@\n",dict);
+        //    [self.locations addObject:[[NSDictionary alloc]initWithDictionary:dict//]];
+        //  }
+        // [self.locations addObjectsFromArray:locationsArray];
+        //  NSLog(@"locationarray :%@",locationsArray);
+       // NSLog(@"%@",self.locations);
+        
+        // [tableView reloadData];
+        // NSLog(@"%@",locations);
+        
+    }
+    else {
+        //error message
+        // issue visual alert
+        UIAlertView *alert = [[UIAlertView alloc]
+                              initWithTitle:@"Cannot connect to server!"
+                              message:@"pls try later!"
+                              delegate:nil
+                              cancelButtonTitle:nil
+                              otherButtonTitles:@"OK", nil];
+        [alert show];
+    }
+    
+}
+-(void)parse:(NSDictionary *)dict {
+    NSString *key=[[dict allKeys]objectAtIndex:0];
+    NSLog( @"key==%@",key);
+    
+    if ([key isEqualToString:@"timetables"]) {
+        NSArray *timetablesAray=[dict valueForKey:key];
+        //NSLog( @"one lo==%@",locationsAray);
+        [lectures removeAllObjects];
+        [lectures addObjectsFromArray:timetablesAray]; 
+        // NSLog(@"locations will be:%@",locations);
+        
+    }
+    
+    [MBProgressHUD hideHUDForView:self.view animated:YES];
+    [self.tableView reloadData];
+    
+    
+    
+}
+
 -(void)add {
     //this is learnt from RMIT Property app
     NewCourseViewController *newCourse=[[NewCourseViewController alloc]initWithNibName:@"NewCourseViewController" bundle:nil];
 
     [newCourse setTitle:@"New Course"];
-    [delegate.navigationController pushViewController:newCourse animated:YES];
+    [self.navigationController pushViewController:newCourse animated:YES];
     
 }
 
@@ -219,23 +298,23 @@
 {
 
     // Return the number of rows in the section.
-    NSLog(@"array count in number of section=%i",[coursesArray count]);
+   // NSLog(@"array count in number of section=%i",[coursesArray count]);
     //return self.coursesArray.count;
     return  5;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSLog(@"array count=%i",[coursesArray count]);
+  //  NSLog(@"array count=%i",[coursesArray count]);
     static NSString *CellIdentifier = @"Cell";
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    if (coursesArray==nil) cell.textLabel.text=@"No Course Data";
+    if (lectures==nil) cell.textLabel.text=@"No Course Data";
     if (cell == nil) {
         cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
     }
     else{
-        Courses *course = [self.coursesArray objectAtIndex:indexPath.row];
+        Courses *course = [self.lectures objectAtIndex:indexPath.row];
         cell.textLabel.text = course.course_name;
         cell.detailTextLabel.text = course.course_description;
     }

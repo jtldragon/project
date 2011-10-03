@@ -19,6 +19,8 @@
 @property (nonatomic, retain) IBOutlet LoginViewController *loginViewController;
 @property (nonatomic, retain) IBOutlet UITabBarController *tabBarController;
 @property (nonatomic ,retain) IBOutlet UINavigationController *navigationController;
+@property (nonatomic ,retain) IBOutlet UINavigationController *timetableNaviController;
+@property (nonatomic ,retain) IBOutlet UINavigationController *locationNaviController;
 @property (nonatomic ,retain) NSString *studentNumber;
 
 @property (nonatomic, retain, readonly) NSManagedObjectContext *managedObjectContext;

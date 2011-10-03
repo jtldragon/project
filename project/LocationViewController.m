@@ -8,13 +8,17 @@
 
 #import "LocationViewController.h"
 #import <YAJLiOS/YAJL.h>
-#import "Location.h"
 
+#import "LocationDetailViewController.h"
+#import "MBProgressHUD.h"
 
+@class Location;
 
 @implementation LocationViewController
 
 @synthesize textfield,segment,selecedIndex,tableView,locations;
+
+//@synthesize locNaviController=_locNaviController;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -35,6 +39,7 @@
     [textfield release];
     [segment release];
     [locations release];
+    //[_locNaviController release];
     [super dealloc];
 }
 
@@ -52,7 +57,9 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    self.title=@"Location";
     locations=[[NSMutableArray alloc]init];
+    //self.navigationItem.rightBarButtonItem=self
     
 }
 
@@ -84,8 +91,8 @@
     if ([locations count]==0) {
         return 0;
     }
-    else{
-    return [locations count];
+    else {
+        return [locations count];
     }
 }
 
@@ -118,8 +125,10 @@
     self.selecedIndex = indexPath.row;
     
     //[PropertyManager sharedPropertyManager].selectedProperty = property;
+   // _locNaviController=delegate.locationNaviController;
     
-    LocationDetailViewController *controller = [[[DetailViewController alloc]initWithLocation:location]autorelease];
+    LocationDetailViewController *detail = [[[LocationDetailViewController alloc]initWithLocation:location]autorelease];
+    [self.navigationController pushViewController:detail animated:YES];
     
     //[self.navigationController pushViewController:controller 
                                        //  animated:YES];
@@ -155,6 +164,8 @@
     //hud.labelText = @"Loading properties...";
     
     //[self.mapView removeAnnotations:[self.mapView annotations]];
+    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    hud.labelText = @"Loading locations...";
     
     [self performSearch:params];
     //[self.delegate=self];
@@ -198,7 +209,7 @@
       //  }
        // [self.locations addObjectsFromArray:locationsArray];
       //  NSLog(@"locationarray :%@",locationsArray);
-      //  NSLog(@"%@",self.locations);
+        NSLog(@"%@",self.locations);
         
        // [tableView reloadData];
         // NSLog(@"%@",locations);
@@ -206,6 +217,14 @@
     }
     else {
         //error message
+        // issue visual alert
+        UIAlertView *alert = [[UIAlertView alloc]
+                              initWithTitle:@"Cannot connect to server!"
+                              message:@"pls try later!"
+                              delegate:nil
+                              cancelButtonTitle:nil
+                              otherButtonTitles:@"OK", nil];
+        [alert show];
     }
     
 }
@@ -222,11 +241,23 @@
         
     }
     else {
-        NSDictionary *locationsAray=[dict valueForKey:key];
-        [locations removeAllObjects];
-        [locations addObject:locationsAray];
+        NSArray *locationsAray=[dict valueForKey:key];
+        NSLog(@"%@",locationsAray);
+        NSDictionary *locationsDict=[dict valueForKey:key];
         
+        //check whether has nsnull object
+        if ([locationsAray isEqual:[NSNull null]]) {
+            NSLog(@"yes");
+            [locations removeAllObjects];
+        }
+        else{
+            NSLog(@"no");
+            [locations removeAllObjects];
+            [locations addObject:locationsDict];
+
+        }
     }
+    [MBProgressHUD hideHUDForView:self.view animated:YES];
     [tableView reloadData];
      
     
