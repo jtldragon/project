@@ -134,7 +134,7 @@
     
     LocationDetailViewController *detail = [[[LocationDetailViewController alloc]initWithLocation:location]autorelease];
     [self.navigationController pushViewController:detail animated:YES];
-    
+    [location release];
     //[self.navigationController pushViewController:controller 
                                        //  animated:YES];
 }
@@ -230,6 +230,7 @@
                               cancelButtonTitle:nil
                               otherButtonTitles:@"OK", nil];
         [alert show];
+        [alert release];
     }
     
 }

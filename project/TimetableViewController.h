@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "projectAppDelegate.h"
 #import <LRResty/LRResty.h>
+#import <SystemConfiguration/SystemConfiguration.h>
 
 @protocol TimetableDelegate <NSObject>
 
@@ -28,6 +29,7 @@
     IBOutlet UILabel *dateLabel;
     IBOutlet UIView *searchView;
     NSDate *date;
+    BOOL availableNetwork;
     
     
 }
@@ -52,5 +54,8 @@
 -(void)parse:(NSDictionary *)dict;
 -(IBAction)getNext:(id)sender;
 -(IBAction)getPrevious:(id)sender;
+//for internetconnectionstatus
+- (void)reachabilityChanged:(NSNotification *)note;
+- (void)updateStatus;
 
 @end

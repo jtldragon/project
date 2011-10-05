@@ -2,7 +2,7 @@
 //  Notes.h
 //  project
 //
-//  Created by Yeshu Liu on 27/09/11.
+//  Created by Yeshu Liu on 5/10/11.
 //  Copyright (c) 2011 RMIT. All rights reserved.
 //
 
@@ -13,9 +13,9 @@
 @interface Notes : NSManagedObject {
 @private
 }
-@property (nonatomic, retain) NSNumber * note_id;
+@property (nonatomic, retain) NSString * note_title;
 @property (nonatomic, retain) NSString * note_text;
-@property (nonatomic, retain) NSNumber * course_id;
-@property (nonatomic, retain) NSSet* courses;
+@property (nonatomic, retain) NSNumber * note_id;
+@property (nonatomic, retain) NSString * note_time;
 
 @end

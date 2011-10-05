@@ -57,8 +57,9 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    // Do any additional setup after loading the view from its nib.
-    //set the date formatter
+    
+    //check the network
+    availableNetwork = NO;
     inFormatter = [[NSDateFormatter alloc] init];
     outFormatter = [[NSDateFormatter alloc] init];
     [inFormatter setDateFormat:@"yyyy-MM-dd"];
@@ -66,22 +67,47 @@
     //hard code the date to 2010/03/02 
     //date=[NSDate date];
     date= [inFormatter dateFromString:@"2010-03-02"];
-
+    
     self.isInSearchMode=NO;
     self.title=@"Timetable";
-    datePicker.date =[NSDate date];
-    
     dateLabel.text=[outFormatter stringFromDate:date];
     delegate=[[[UIApplication sharedApplication]delegate]retain];
     lectures=[[NSMutableArray alloc]init];
-
+    
     self.resultTable.delegate=self;
     [self.resultTable setRowHeight:80];
     searchButton=[[UIBarButtonItem alloc]initWithTitle:@"Search" style:UIBarButtonSystemItemAction target:self action:@selector(toggleView)];
     
     self.navigationItem.leftBarButtonItem=searchButton;
-    NSDictionary *params=[[NSDictionary alloc]initWithObjects:[[NSArray alloc]initWithObjects:delegate.studentNumber,@"2010-03-02", nil] forKeys:[[NSArray alloc]initWithObjects:@"studentNumber",@"date", nil]]; 
+
+    BOOL returnVal = [self isDataSourceAvailable];
+    availableNetwork = returnVal;
+    datePicker.date =[NSDate date];
+    if (!availableNetwork) {
+        NSLog(@"unable");
+        UIAlertView *alert = [[UIAlertView alloc]
+                              initWithTitle:@"Network loss"
+                              message:@"Unable to connect to internet"
+                              delegate:nil
+                              cancelButtonTitle:nil
+                              otherButtonTitles:@"Ok", nil];
+        alert.tag=1;
+        [alert show];
+        [alert release];
+        
+    }else{
+        
+    // Do any additional setup after loading the view from its nib.
+    //set the date formatter
+        NSDictionary *params=[[[NSDictionary alloc]initWithObjects:[[[NSArray alloc]initWithObjects:delegate.studentNumber, @"2010-03-02", nil]autorelease] forKeys:[[[NSArray alloc]initWithObjects:@"studentNumber",@"date", nil]autorelease]]autorelease];
     [self performSearch:params];
+        
+    }
+    
+    
+    
+    
+    
     
    
 }
@@ -106,6 +132,7 @@
 #pragma mark - 
 #pragma mark Action
 -(IBAction)getNext:(id)sender{
+    if (availableNetwork) {
     NSDate *dateFromString = [outFormatter dateFromString:dateLabel.text];
     
     // start by retrieving day, weekday, month and year components for yourDate
@@ -124,11 +151,13 @@
     
     
     
-    NSDictionary *params=[[NSDictionary alloc]initWithObjects:[[NSArray alloc]initWithObjects:delegate.studentNumber,[inFormatter stringFromDate:nextDate], nil] forKeys:[[NSArray alloc]initWithObjects:@"studentNumber",@"date", nil]]; 
+    NSDictionary *params=[[[NSDictionary alloc]initWithObjects:[[[NSArray alloc]initWithObjects:delegate.studentNumber,[inFormatter stringFromDate:nextDate], nil]autorelease] forKeys:[[[NSArray alloc]initWithObjects:@"studentNumber",@"date", nil]autorelease]]autorelease]; 
     [self performSearch:params];
+    }
     
 }
 -(IBAction)getPrevious:(id)sender{
+    if (availableNetwork) {
     NSDate *dateFromString = [outFormatter dateFromString:dateLabel.text];
     // start by retrieving day, weekday, month and year components for yourDate
     NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
@@ -143,8 +172,9 @@
 
     
     
-    NSDictionary *params=[[NSDictionary alloc]initWithObjects:[[NSArray alloc]initWithObjects:delegate.studentNumber,[inFormatter stringFromDate:preDate], nil] forKeys:[[NSArray alloc]initWithObjects:@"studentNumber",@"date", nil]]; 
+    NSDictionary *params=[[[NSDictionary alloc]initWithObjects:[[[NSArray alloc]initWithObjects:delegate.studentNumber,[inFormatter stringFromDate:preDate], nil]autorelease] forKeys:[[[NSArray alloc]initWithObjects:@"studentNumber",@"date", nil]autorelease]]autorelease]; 
     [self performSearch:params];
+    }
     
 }
 
@@ -181,6 +211,7 @@
 
 }
 -(void)search{
+    if (!availableNetwork) {
         
         NSDate *selectDate = datePicker.date;
         NSString *dateString = [inFormatter stringFromDate:selectDate];
@@ -190,6 +221,7 @@
         [params setObject:dateString forKey:@"date"];
     dateLabel.text=[outFormatter stringFromDate:selectDate];
         [self performSearch:params];
+    }
     
 }
 - (void)performSearch:(NSDictionary *)params
@@ -232,6 +264,7 @@
                               cancelButtonTitle:nil
                               otherButtonTitles:@"OK", nil];
         [alert show];
+        [alert release];
         [MBProgressHUD hideHUDForView:self.view animated:YES];
     }
     
@@ -298,6 +331,7 @@
         cell.textLabel.numberOfLines=2;
         cell.textLabel.text = [NSString stringWithFormat:@"%@ \n                 %@",timetable.getTime,timetable.classTitle];
         cell.detailTextLabel.text=[timetable description];
+        [timetable release];
         
     }
     
@@ -321,6 +355,27 @@
     
     //[self.navigationController pushViewController:controller 
     //  animated:YES];
+}
+
+#pragma mark- reachibility
+- (void)reachabilityChanged:(NSNotification *)note {
+    [self updateStatus];
+}
+- (BOOL)isDataSourceAvailable {
+    
+    static BOOL checkNetwork = YES;
+    static BOOL _isDataSourceAvailable = NO;
+    if (checkNetwork) { // Since checking the reachability of a host can be expensive, cache the result and perform the reachability check once.
+        checkNetwork = NO;
+        Boolean success;
+        const char *host_name = "google.com"; //pretty reliable :)
+        SCNetworkReachabilityRef reachability = SCNetworkReachabilityCreateWithName(NULL, host_name);
+        SCNetworkReachabilityFlags flags;
+        success = SCNetworkReachabilityGetFlags(reachability, &flags);
+        _isDataSourceAvailable = success && (flags & kSCNetworkFlagsReachable) && !(flags & kSCNetworkFlagsConnectionRequired);
+        CFRelease(reachability);
+    }
+    return _isDataSourceAvailable;
 }
 
 

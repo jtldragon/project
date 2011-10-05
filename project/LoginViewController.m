@@ -58,7 +58,7 @@
     // Release objects and return our controller
     [fetched release];
     [fetchRequest release];
-    
+    //[entity release];
     [descriptor release];
     
     //NSLog(@"fected count=%@",[_fetchResultsController.fetchedObjects count]);
@@ -145,6 +145,19 @@
 -(IBAction)done:(id)sender{
     [textfield resignFirstResponder];
     studentNumber=textfield.text;
+    if ([studentNumber isEqualToString:@""]) {
+        // issue visual alert
+        UIAlertView *alert = [[UIAlertView alloc]
+                              initWithTitle:@"No input!"
+                              message:@"pls type your student number!"
+                              delegate:nil
+                              cancelButtonTitle:nil
+                              otherButtonTitles:@"OK", nil];
+        [alert show];
+        [alert release];
+
+    }
+    else{
     NSLog(@"sudent no==%@",studentNumber);
     
     //delete sudentnumber stored in the database
@@ -174,6 +187,8 @@
     for (UIView *view in [delegate.window subviews]) { [view removeFromSuperview]; }
     //add the timetable view to main window
     [delegate.window addSubview:delegate.tabBarController.view];
+    }
+    
 }
 - (IBAction)textFieldDoneEditing:(id)sender
 {
