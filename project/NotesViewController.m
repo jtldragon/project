@@ -10,15 +10,17 @@
 #import <YAJLiOS/YAJL.h>
 #import "MBProgressHUD.h"
 #import "Courses.h"
-#import "NewCourseViewController.h"
+#import "NewNoteViewController.h"
 @class Timetable;
 
 
 @implementation NotesViewController
 
-@synthesize lectures,selectedIndex;
+@synthesize lectures,selectedIndex,coursesArray;
 
 @synthesize fetchedResultsController=_fetchResultsController;
+
+
 
 #pragma fetchresulcontroller
 -(NSFetchedResultsController *)fetchedResultsController {
@@ -36,7 +38,8 @@
     [fetchRequest setSortDescriptors:[NSArray arrayWithObject:descriptor]];
     
     NSError *error;
-    //coursesArray=[[NSArray alloc]initWithArray:[delegate.managedObjectContext executeFetchRequest:fetchRequest error:&error]];
+    coursesArray=[[NSArray alloc]initWithArray:[delegate.managedObjectContext executeFetchRequest:fetchRequest error:&error]];
+    NSLog(@"%@",coursesArray);
     
     //  NSLog(@"%@ records found.",[resultSet count]);
     /* for(NSManagedObject *a in resultSet){
@@ -86,6 +89,7 @@
 {
     [lectures release];
     [delegate release];
+    [coursesArray release];
     [super dealloc];
     
 }
@@ -103,66 +107,70 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+       delegate=[[[UIApplication sharedApplication]delegate]retain];
     self.title=@"Notes";
-
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
+  
+    [self fetch];
+    
  
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-     self.navigationItem.rightBarButtonItem = self.editButtonItem;
-    delegate=[[[UIApplication sharedApplication]delegate]retain];
+   //  self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    
     //self.navigationItem.rightBarButtonItem=self
     self.navigationItem.leftBarButtonItem=[[[UIBarButtonItem alloc]initWithTitle:@"Add" style:UIBarButtonItemStylePlain target:self action:@selector(add)]autorelease];
     
     
-    
-    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    hud.labelText = @"Loading lectures...";
-    [self search];
-    /*
-    TimetableConnect *conn=[[TimetableConnect alloc]initWithParams:array];
-    [conn makeRequest];
-    NSMutableArray *timesArray=[[NSMutableArray alloc]initWithArray:conn.timetablesArray];
-    NSLog(@"times count=%i",[timesArray count]);
-    NSMutableArray *lecturesArray=[[NSMutableArray alloc]init];
-    for (NSDictionary *dict in timesArray) {
-        NSLog(@"%@\n ",dict);
-        if ([[dict valueForKey:@"activityType"] isEqualToString:@"Lecture"]) {
-            NSString *title=[dict valueForKey:@"title"];
-            //check whether there is a duplicate
-            if ([lecturesArray count]==0) {
-                [lecturesArray addObject:title];
+}
+
+-(void)fetch{
+    //preform the fetch,
+    NSError *error;
+    if (![[self fetchedResultsController] performFetch:&error]) {
+		// Update to handle the error appropriately.
+		NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
+		exit(-1);  // Fail
+	}
+    else{
+        if ([coursesArray count]==0) {
+            //check the network
+            availableNetwork = NO;
+            BOOL returnVal = [self isDataSourceAvailable];
+            availableNetwork = returnVal;
+            if (!availableNetwork) {
+                NSLog(@"unable");
+                UIAlertView *alert = [[UIAlertView alloc]
+                                      initWithTitle:@"Network loss"
+                                      message:@"Unable to connect to internet"
+                                      delegate:nil
+                                      cancelButtonTitle:nil
+                                      otherButtonTitles:@"Ok", nil];
+                alert.tag=1;
+                [alert show];
+
             }
-            else {
-                BOOL addflag=YES;
-                //check whether there is a duplicate
-                for (int i=0; i<[lecturesArray count];i++ ) {
-                    NSString *a=[lecturesArray objectAtIndex:i];
-                    if ([a isEqualToString:title]) {
-                        addflag=NO;
-                    }
-                }
-                if (addflag) {
-                    [lecturesArray addObject:title];
-                }
-                
-            }
-            
+            else{
+
+            UIAlertView *alert = [[UIAlertView alloc]
+                                  initWithTitle:@"courses not found!"
+                                  message:@"Do you like to get courses from web?"
+                                  delegate:self
+                                  cancelButtonTitle:@"Cancel"
+                                  otherButtonTitles:@"Ok", nil];
+            alert.tag=1;
+            [alert show];
+            [self.navigationItem.leftBarButtonItem setEnabled:NO];
+        }
+        }
+        
+        else{
+            [self.tableView reloadData];
         }
     }
-    
-    for (NSString *s in lecturesArray) {
-        NSLog(@"%@\n",s);
-    }
-    NSLog(@"count=%i",[conn.lectures count]);
-    coursesArray=[[NSMutableArray alloc]initWithArray:lecturesArray];
-     */
-    
-   // NSLog(@"array count in view did load=%i",[coursesArray count]);
-    
+
     
 }
--(void)search {
+//connect the web service to get the lectures
+-(void)connectWebOnce {
     //generate date string
     NSString *dateString = @"2010-03-02";
     
@@ -170,7 +178,9 @@
     [params setObject:delegate.studentNumber forKey:@"studentNumber"];
     [params setObject:dateString forKey:@"date"];
     [self performSearch:params];
+    
 }
+
 
 - (void)performSearch:(NSDictionary *)params
 {
@@ -183,7 +193,7 @@
     NSDictionary *requestHeaders = [NSDictionary 
                                     dictionaryWithObject:@"application/json" forKey:@"Accept"];
     
-    [[LRResty client]get:urlString parameters:nil headers:requestHeaders delegate:self];
+    [[[LRResty client]get:urlString parameters:nil headers:requestHeaders delegate:self]timeoutAfter:10 handleWithBlock:^(LRRestyRequest *req){NSLog(@"timeout");}];
     //return self.locations;
 }
 
@@ -196,19 +206,11 @@
         NSData *data = [response responseData];
         NSDictionary *jsonDictionary = [data yajl_JSON];
        NSLog(@"%@",jsonDictionary);
-        [self parse:jsonDictionary];
-        // NSArray *locationsArray = [jsonDictionary valueForKey:@"location"];
-        // for (NSDictionary *dict in locationsArray) {
-        //    NSLog(@"dict %@\n",dict);
-        //    [self.locations addObject:[[NSDictionary alloc]initWithDictionary:dict//]];
-        //  }
-        // [self.locations addObjectsFromArray:locationsArray];
-        //  NSLog(@"locationarray :%@",locationsArray);
-       // NSLog(@"%@",self.locations);
-        
-        // [tableView reloadData];
-        // NSLog(@"%@",locations);
-        
+        lectures=[[NSMutableArray alloc]initWithArray:[self parse:jsonDictionary]];
+        NSLog(@"%@",lectures);
+        if ([lectures count]>0) {
+            [self addLectures:lectures];
+        }
     }
     else {
         //error message
@@ -219,36 +221,92 @@
                               delegate:nil
                               cancelButtonTitle:nil
                               otherButtonTitles:@"OK", nil];
+        alert.tag=3;
         [alert show];
     }
     
 }
--(void)parse:(NSDictionary *)dict {
+- (void)restyRequest:(LRRestyRequest *)request didFailWithError:(NSError *)error {
+    // issue visual alert
+    UIAlertView *alert = [[UIAlertView alloc]
+                          initWithTitle:@"Cannot connect to server!"
+                          message:@"pls try later!"
+                          delegate:nil
+                          cancelButtonTitle:nil
+                          otherButtonTitles:@"OK", nil];
+    alert.tag=2;
+    [alert show];
+    
+}
+-(NSMutableArray *)parse:(NSDictionary *)dict {
+    NSMutableArray *lecturesArray=[[NSMutableArray alloc]init];
     NSString *key=[[dict allKeys]objectAtIndex:0];
     NSLog( @"key==%@",key);
     
     if ([key isEqualToString:@"timetables"]) {
         NSArray *timetablesAray=[dict valueForKey:key];
-        //NSLog( @"one lo==%@",locationsAray);
-        [lectures removeAllObjects];
-        [lectures addObjectsFromArray:timetablesAray]; 
-        // NSLog(@"locations will be:%@",locations);
+        
+        //denerate the lecturesArray
+        for (NSDictionary *dict in timetablesAray) {
+            NSLog(@"%@\n ",dict);
+            if ([[dict valueForKey:@"activityType"] isEqualToString:@"Lecture"]) {
+                NSString *title=[dict valueForKey:@"title"];
+                //check whether there is a duplicate
+                if ([lecturesArray count]==0) {
+                    [lecturesArray addObject:title];
+                }
+                else {
+                    BOOL addflag=YES;
+                    //check whether there is a duplicate
+                    for (int i=0; i<[lecturesArray count];i++ ) {
+                        NSString *a=[lecturesArray objectAtIndex:i];
+                        if ([a isEqualToString:title]) {
+                            addflag=NO;
+                        }
+                    }
+                    if (addflag) {
+                        [lecturesArray addObject:title];
+                    }
+                    
+                }
+                
+            }
+        }
+
+        
         
     }
+    for (NSString *s in lecturesArray) {
+        NSLog(@"%@\n",s);
+    }
+    return lecturesArray;
     
-    [MBProgressHUD hideHUDForView:self.view animated:YES];
-    [self.tableView reloadData];
     
+}
+//at the lectures to the database
+-(void)addLectures:(NSMutableArray *)lectureArray {
+    //create the course model
+    NSManagedObjectID *course;
+    for (NSInteger i=1; i<lectureArray.count+1; i++) {
+        course=[NSEntityDescription insertNewObjectForEntityForName:@"Courses" inManagedObjectContext:delegate.managedObjectContext];
+        [course setValue:[[NSNumber alloc]initWithInt:i] forKey:@"course_id"];
+        [course setValue:[lectureArray objectAtIndex:i-1] forKey:@"course_name"];
+        [course setValue:@"" forKey:@"course_description"];
+        NSError *error;
+        [delegate.managedObjectContext save:&error];
+        NSLog(@"lectures saved");
+        [self fetch];
+    }
     
     
 }
 
--(void)add {
+-(IBAction)add {
     //this is learnt from RMIT Property app
-    NewCourseViewController *newCourse=[[NewCourseViewController alloc]initWithNibName:@"NewCourseViewController" bundle:nil];
+    NewNoteViewController *newNote=[[NewNoteViewController alloc]initWithNibName:@"NewNoteViewController" bundle:nil];
 
-    [newCourse setTitle:@"New Course"];
-    [self.navigationController pushViewController:newCourse animated:YES];
+    [newNote setTitle:@"New Note"];
+    [self.navigationController pushViewController:newNote animated:YES];
     
 }
 
@@ -300,7 +358,7 @@
     // Return the number of rows in the section.
    // NSLog(@"array count in number of section=%i",[coursesArray count]);
     //return self.coursesArray.count;
-    return  5;
+    return  [coursesArray count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -309,14 +367,15 @@
     static NSString *CellIdentifier = @"Cell";
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    if (lectures==nil) cell.textLabel.text=@"No Course Data";
+    //if (lectures==nil) cell.textLabel.text=@"No Course Data";
     if (cell == nil) {
         cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
     }
     else{
-        Courses *course = [self.lectures objectAtIndex:indexPath.row];
-        cell.textLabel.text = course.course_name;
-        cell.detailTextLabel.text = course.course_description;
+        Courses *course = [self.coursesArray objectAtIndex:indexPath.row];
+        NSLog(@"count=%i",[coursesArray count]);
+        cell.textLabel.text = [course course_name];
+        cell.detailTextLabel.text =[course course_id];
     }
     // Configure the cell...
     
@@ -375,5 +434,50 @@
      [detailViewController release];
      */
 }
+#pragma mark- UIAlertView
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
+    if (alertView.tag==1) {
+        if (buttonIndex!=[alertView cancelButtonIndex]) {
+            [self connectWebOnce];
+        }
+
+    }
+}
+#pragma mark- reachibility
+- (void)reachabilityChanged:(NSNotification *)note {
+    [self updateStatus];
+}
+- (BOOL)isDataSourceAvailable {
+    
+    static BOOL checkNetwork = YES;
+    static BOOL _isDataSourceAvailable = NO;
+    if (checkNetwork) { // Since checking the reachability of a host can be expensive, cache the result and perform the reachability check once.
+        checkNetwork = NO;
+        Boolean success;
+        const char *host_name = "google.com"; //pretty reliable :)
+        SCNetworkReachabilityRef reachability = SCNetworkReachabilityCreateWithName(NULL, host_name);
+        SCNetworkReachabilityFlags flags;
+        success = SCNetworkReachabilityGetFlags(reachability, &flags);
+        _isDataSourceAvailable = success && (flags & kSCNetworkFlagsReachable) && !(flags & kSCNetworkFlagsConnectionRequired);
+        CFRelease(reachability);
+    }
+    return _isDataSourceAvailable;
+}
+
+/*
+- (void)updateStatus
+{
+    // Query the SystemConfiguration framework for the state of the device's network connections.
+    self.internetConnectionStatus    = [[Reachability sharedReachability] internetConnectionStatus];
+    if (self.internetConnectionStatus == NotReachable) {
+        //show an alert to let the user know that they can't connect...
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Network Status" message:@"Sorry, our network guro determined that the network is not available. Please try again later." delegate:self cancelButtonTitle:nil otherButtonTitles:@"OK", nil];
+        [alert show];
+    }  else {
+        // If the network is reachable, make sure the login button is enabled.
+       // _loginButton.enabled = YES;
+    }
+}
+ */
 
 @end

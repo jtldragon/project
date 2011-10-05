@@ -89,7 +89,7 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     if ([locations count]==0) {
-        return 0;
+        return 1;
     }
     else {
         return [locations count];
@@ -106,13 +106,18 @@
         cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle
                                     reuseIdentifier:cellIdentifier] autorelease];
     }
+    if ([locations count]==0) {
+        cell.textLabel.text=@"Location not found";
+        cell.detailTextLabel.text=@"";
+    }
     
-    
+    else{
     Location *location=[[Location alloc]initWithDictionary:[locations objectAtIndex:indexPath.row]];
    
     cell.textLabel.text = [NSString stringWithFormat:@"%@, %@",location.campus,location.name];
     cell.detailTextLabel.text=[NSString stringWithFormat:@"%@, %@",location.latitude,location.longitude];
     [location release];
+    }
     return cell;
 }
 

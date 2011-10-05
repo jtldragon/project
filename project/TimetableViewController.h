@@ -20,11 +20,14 @@
 
 @interface TimetableViewController : UIViewController <UITableViewDataSource,UITableViewDelegate,TimetableDelegate,LRRestyClientResponseDelegate> {
     IBOutlet UIDatePicker *datePicker;
-    IBOutlet UIBarButtonItem *resultButton;
+    IBOutlet UIBarButtonItem *searchButton;
     IBOutlet UITableView *resultTable;
     projectAppDelegate *delegate;
     NSMutableArray *lectures;
     NSUInteger selectedIndex;
+    IBOutlet UILabel *dateLabel;
+    IBOutlet UIView *searchView;
+    NSDate *date;
     
     
 }
@@ -33,16 +36,21 @@
 
 
 @property(nonatomic,retain) IBOutlet UIDatePicker *datePicker;
-@property(nonatomic,retain) IBOutlet UIBarButtonItem *resultButton;
+@property(nonatomic,retain) IBOutlet UIBarButtonItem *searchButton;
 @property(nonatomic,retain) IBOutlet UITableView *resultTable;
-@property(nonatomic,assign) BOOL isInResultMode;
+@property(nonatomic,assign) BOOL isInSearchMode;
 @property (nonatomic, retain) NSMutableArray *lectures;
 @property (nonatomic, assign) NSUInteger selectedIndex;
+@property (nonatomic,retain)IBOutlet UILabel *dateLabel;
+@property (nonatomic,retain)IBOutlet UIView *searchView;
+@property (nonatomic,retain)NSDate *date;
+@property (nonatomic ,retain)NSDateFormatter *outFormatter;
+@property (nonatomic ,retain)NSDateFormatter *inFormatter;
 
--(void)getResultView;
 -(void)search;
--(IBAction)add;
 -(void)performSearch;
 -(void)parse:(NSDictionary *)dict;
+-(IBAction)getNext:(id)sender;
+-(IBAction)getPrevious:(id)sender;
 
 @end

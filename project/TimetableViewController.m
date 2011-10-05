@@ -15,7 +15,7 @@
 @implementation TimetableViewController
 
 
-@synthesize resultButton,datePicker,isInResultMode,lectures,selectedIndex,resultTable;
+@synthesize searchButton,datePicker,isInSearchMode,lectures,selectedIndex,resultTable,dateLabel,searchView,date,outFormatter,inFormatter;
 
 
 
@@ -30,12 +30,18 @@
 
 - (void)dealloc
 {
-    [super dealloc];
-    [resultButton release];
+    [searchButton release];
     [delegate release];
     [lectures release];
     [resultTable release];
+    [dateLabel release];
+    [searchView release];
     [datePicker release];
+    [date release];
+    [outFormatter release];
+    [inFormatter release];
+    [super dealloc];
+    
 }
 
 - (void)didReceiveMemoryWarning
@@ -52,16 +58,30 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    self.isInResultMode=NO;
+    //set the date formatter
+    inFormatter = [[NSDateFormatter alloc] init];
+    outFormatter = [[NSDateFormatter alloc] init];
+    [inFormatter setDateFormat:@"yyyy-MM-dd"];
+    [outFormatter setDateFormat:@"EEEE MMMM d, yyyy"];
+    //hard code the date to 2010/03/02 
+    //date=[NSDate date];
+    date= [inFormatter dateFromString:@"2010-03-02"];
+
+    self.isInSearchMode=NO;
     self.title=@"Timetable";
     datePicker.date =[NSDate date];
+    
+    dateLabel.text=[outFormatter stringFromDate:date];
     delegate=[[[UIApplication sharedApplication]delegate]retain];
     lectures=[[NSMutableArray alloc]init];
+
     self.resultTable.delegate=self;
-    [self.resultTable setRowHeight:90];
-    resultButton=[[UIBarButtonItem alloc]initWithTitle:@"Result" style:UIBarButtonSystemItemAction target:self action:@selector(search)];
+    [self.resultTable setRowHeight:80];
+    searchButton=[[UIBarButtonItem alloc]initWithTitle:@"Search" style:UIBarButtonSystemItemAction target:self action:@selector(toggleView)];
     
-    self.navigationItem.leftBarButtonItem=resultButton;
+    self.navigationItem.leftBarButtonItem=searchButton;
+    NSDictionary *params=[[NSDictionary alloc]initWithObjects:[[NSArray alloc]initWithObjects:delegate.studentNumber,@"2010-03-02", nil] forKeys:[[NSArray alloc]initWithObjects:@"studentNumber",@"date", nil]]; 
+    [self performSearch:params];
     
    
 }
@@ -73,6 +93,7 @@
     // e.g. self.myOutlet = nil;
     self.resultTable=nil;
     self.selectedIndex=NSUIntegerMax;
+    self.searchView=nil;
    
 }
 
@@ -82,51 +103,100 @@
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
+#pragma mark - 
+#pragma mark Action
+-(IBAction)getNext:(id)sender{
+    NSDate *dateFromString = [outFormatter dateFromString:dateLabel.text];
+    
+    // start by retrieving day, weekday, month and year components for yourDate
+    NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+    
+    // now build a NSDate object for the next day
+    NSDateComponents *offsetComponents = [[NSDateComponents alloc] init];
+    [offsetComponents setDay:1];
+    NSDate *nextDate = [gregorian dateByAddingComponents:offsetComponents toDate: dateFromString options:0];
+    [offsetComponents release];
+    [gregorian release];
+    
+    dateLabel.text=[outFormatter stringFromDate:nextDate];
+    
+
+    
+    
+    
+    NSDictionary *params=[[NSDictionary alloc]initWithObjects:[[NSArray alloc]initWithObjects:delegate.studentNumber,[inFormatter stringFromDate:nextDate], nil] forKeys:[[NSArray alloc]initWithObjects:@"studentNumber",@"date", nil]]; 
+    [self performSearch:params];
+    
+}
+-(IBAction)getPrevious:(id)sender{
+    NSDate *dateFromString = [outFormatter dateFromString:dateLabel.text];
+    // start by retrieving day, weekday, month and year components for yourDate
+    NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+    
+    // now build a NSDate object for the next day
+    NSDateComponents *offsetComponents = [[NSDateComponents alloc] init];
+    [offsetComponents setDay:-1];
+    NSDate *preDate = [gregorian dateByAddingComponents:offsetComponents toDate: dateFromString options:0];
+    [offsetComponents release];
+    [gregorian release];
+    dateLabel.text=[outFormatter stringFromDate:preDate];
+
+    
+    
+    NSDictionary *params=[[NSDictionary alloc]initWithObjects:[[NSArray alloc]initWithObjects:delegate.studentNumber,[inFormatter stringFromDate:preDate], nil] forKeys:[[NSArray alloc]initWithObjects:@"studentNumber",@"date", nil]]; 
+    [self performSearch:params];
+    
+}
+
 
 #pragma mark - 
 #pragma mark Toggle result View
-//when user click the 'result' button, the table view flip out.
--(void)getResultView{
+-(void)toggleView{
+    [searchButton setTitle:self.isInSearchMode ? @"Search":@"Result"];
     UIView *fromView=self.view;
-    UIView *toView=resultTable;
+    UIView *toView=self.searchView;
     
-    if (self.isInResultMode) {
-        fromView=resultTable;
+    if (self.isInSearchMode) {
+        fromView=self.searchView;
         toView=self.view;
     }
-    UIViewAnimationOptions animationOptions = self.isInResultMode ? UIViewAnimationOptionTransitionFlipFromRight : UIViewAnimationOptionTransitionFlipFromLeft;
+    UIViewAnimationOptions animationOptions = self.isInSearchMode? UIViewAnimationOptionTransitionFlipFromRight : UIViewAnimationOptionTransitionFlipFromLeft;
     
     //[sender setEnabled:NO];
+    if (isInSearchMode) {
+        [self search];
+    }
     
     [UIView transitionFromView:fromView toView:toView duration:0.4 options:animationOptions completion:^(BOOL finished) {
-        self.isInResultMode = !self.isInResultMode;
+        self.isInSearchMode = !self.isInSearchMode;
         
         
     }];
+    
+    //[searchButton setTitle:self.isInSearchMode ? @"Result":@"Search"];
+    
+    
     
     
 
 }
 -(void)search{
-    if (isInResultMode) {
-        [self getResultView];
-    }
-    else{
-    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    hud.labelText = @"Loading lectures...";
-    NSDateFormatter *format = [[NSDateFormatter alloc] init];
-    [format setDateFormat:@"yyyy-MM-dd"];
-    NSDate *selectDate = datePicker.date;
-    NSString *dateString = [format stringFromDate:selectDate];
-    NSLog( @"picks %@",dateString);
-    NSMutableDictionary *params=[NSMutableDictionary dictionary];
-    [params setObject:delegate.studentNumber forKey:@"studentNumber"];
-    [params setObject:dateString forKey:@"date"];
-    [self performSearch:params];
-    }
+        
+        NSDate *selectDate = datePicker.date;
+        NSString *dateString = [inFormatter stringFromDate:selectDate];
+        NSLog( @"picks %@",dateString);
+        NSMutableDictionary *params=[NSMutableDictionary dictionary];
+        [params setObject:delegate.studentNumber forKey:@"studentNumber"];
+        [params setObject:dateString forKey:@"date"];
+    dateLabel.text=[outFormatter stringFromDate:selectDate];
+        [self performSearch:params];
+    
 }
 - (void)performSearch:(NSDictionary *)params
 {
+    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    hud.labelText = @"Loading timetables...";
+    
     NSString *urlString=@"";
     urlString=[NSString stringWithFormat:@"https://announcements.mobile-test.its.rmit.edu.au/studentwebservices/rest/timetable/studentId/%@/date/%@/",[params objectForKey:@"studentNumber"],[params objectForKey:@"date"]];
     
@@ -162,6 +232,7 @@
                               cancelButtonTitle:nil
                               otherButtonTitles:@"OK", nil];
         [alert show];
+        [MBProgressHUD hideHUDForView:self.view animated:YES];
     }
     
 }
@@ -180,8 +251,10 @@
     
     [MBProgressHUD hideHUDForView:self.view animated:YES];
     [self.resultTable reloadData];
-    [resultButton setTitle:self.isInResultMode ? @"Result":@"Search"];
-    [self getResultView];
+    
+    if (isInSearchMode) {
+        [self toggleView];
+    }
     
     
     
@@ -216,6 +289,7 @@
     }
     if ([lectures count]==0) {
         cell.textLabel.text=@"No course today";
+        cell.detailTextLabel.text=@"";
         
     }
     else {

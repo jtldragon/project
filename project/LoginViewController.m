@@ -85,6 +85,7 @@
     [button release];
     [delegate release];
     [_fetchResultsController release];
+    [resultArray release];
     [super dealloc];
 }
 

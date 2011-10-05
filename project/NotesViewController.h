@@ -8,6 +8,8 @@
 #import "projectAppDelegate.h"
 #import <UIKit/UIKit.h>
 #import <LRResty/LRResty.h>
+#import <SystemConfiguration/SystemConfiguration.h>
+//#import "Reachability.h"
 
 @protocol TimetableDelegate <NSObject>
 
@@ -16,21 +18,30 @@
 @end
 
 
-@interface NotesViewController : UITableViewController <NSFetchedResultsControllerDelegate,LRRestyClientResponseDelegate,TimetableDelegate> {
+@interface NotesViewController : UITableViewController <NSFetchedResultsControllerDelegate,LRRestyClientResponseDelegate,TimetableDelegate,UIAlertViewDelegate,LRRestyRequestDelegate> {
     NSMutableArray *lectures;
     NSUInteger selectedIndex;
     projectAppDelegate *delegate;
-    NSFetchedResultsController *_fetchResultsController;
+    //NSFetchedResultsController *_fetchResultsController;
+    BOOL availableNetwork;
+    //NetworkStatus internetConnectionStatus;
 }
-
+//@property NetworkStatus internetConnectionStatus;
+@property (nonatomic, retain) NSArray *coursesArray;
 @property (nonatomic, retain) NSMutableArray *lectures;
 @property (nonatomic, assign) NSUInteger selectedIndex;
 @property(nonatomic, retain) NSFetchedResultsController *fetchedResultsController;
 //@property (nonatomic ,retain)UINavigationController *notesNaviController;
 
-- (IBAction)search;
+
 -(IBAction)add;
 -(void)performSearch;
--(void)parse:(NSDictionary *)dict;
+-(NSMutableArray *)parse:(NSDictionary *)dict;
+-(void)addLectures:(NSMutableArray *)lectureArray;
+-(void)fetch;
+-(BOOL)isDataSourceAvailable;
+//for internetconnectionstatus
+- (void)reachabilityChanged:(NSNotification *)note;
+- (void)updateStatus;
 
 @end
