@@ -34,7 +34,7 @@
 {
     [textLabel release];
     [timeLabel release];
-    [timeLabel release];
+    [titleLabel release];
     [note release];
     [super dealloc];
 }

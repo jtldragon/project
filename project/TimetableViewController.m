@@ -7,7 +7,6 @@
 //
 
 #import "TimetableViewController.h"
-#import "TimetableResultViewController.h"
 #import <YAJLiOS/YAJL.h>
 #import "MBProgressHUD.h"
 #import "Timetable.h"
@@ -192,8 +191,9 @@
     }
     UIViewAnimationOptions animationOptions = self.isInSearchMode? UIViewAnimationOptionTransitionFlipFromRight : UIViewAnimationOptionTransitionFlipFromLeft;
     
-    //[sender setEnabled:NO];
-    if (isInSearchMode) {
+    
+    NSLog(@"is in search mode =%@",(self.isInSearchMode? @"yes":@"no"));
+    if (self.isInSearchMode) {
         [self search];
     }
     
@@ -211,7 +211,7 @@
 
 }
 -(void)search{
-    if (!availableNetwork) {
+    if (availableNetwork) {
         
         NSDate *selectDate = datePicker.date;
         NSString *dateString = [inFormatter stringFromDate:selectDate];
@@ -234,7 +234,6 @@
     
     
     
-    NSLog(@"%@",urlString);
     NSDictionary *requestHeaders = [NSDictionary 
                                     dictionaryWithObject:@"application/json" forKey:@"Accept"];
     
@@ -246,12 +245,10 @@
 
 - (void)restClient:(LRRestyClient *)client receivedResponse:(LRRestyResponse *)response
 {
-    NSLog(@"response==%@",response);
+    //NSLog(@"response==%@",response);
     if ([response status]==200) {
         NSData *data = [response responseData];
-        NSLog(@"%@",data);
         NSDictionary *jsonDictionary = [data yajl_JSON];
-        NSLog(@"%@",jsonDictionary);
         [self parse:jsonDictionary];
     }
     else {
@@ -271,14 +268,10 @@
 }
 -(void)parse:(NSDictionary *)dict {
     NSString *key=[[dict allKeys]objectAtIndex:0];
-    NSLog( @"key==%@",key);
-    
     if ([key isEqualToString:@"timetables"]) {
         NSArray *timetablesAray=[dict valueForKey:key];
-        //NSLog( @"one lo==%@",locationsAray);
         [lectures removeAllObjects];
         [lectures addObjectsFromArray:timetablesAray]; 
-        // NSLog(@"locations will be:%@",locations);
         
     }
     
@@ -344,17 +337,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath;
 {
-  //  Location *location=[[Location alloc]initWithDictionary:[locations objectAtIndex:indexPath.row]];
     self.selectedIndex = indexPath.row;
-    
-    //[PropertyManager sharedPropertyManager].selectedProperty = property;
-    // _locNaviController=delegate.locationNaviController;
-    
-   // LocationDetailViewController *detail = [[[LocationDetailViewController alloc]initWithLocation:location]autorelease];
-   // [self.navigationController pushViewController:detail animated:YES];
-    
-    //[self.navigationController pushViewController:controller 
-    //  animated:YES];
 }
 
 #pragma mark- reachibility

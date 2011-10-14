@@ -56,6 +56,5 @@
 -(IBAction)getPrevious:(id)sender;
 //for internetconnectionstatus
 - (void)reachabilityChanged:(NSNotification *)note;
-- (void)updateStatus;
 
 @end
