@@ -30,7 +30,6 @@
 
 -(IBAction)search;
 -(IBAction)textFieldDoneEditing:(id)sender;
--(void)performSearch;
 -(void)parse:(NSDictionary *)dict;
 
 

@@ -27,7 +27,7 @@
 @property(nonatomic,retain) IBOutlet UIBarButtonItem *editButton;
 @property(nonatomic,retain) IBOutlet UITextView *textview;
 @property(nonatomic,retain) IBOutlet UITextField *titleField;
-@property (nonatomic,retain)IBOutlet UITableView *tableView;
+@property (nonatomic,retain)IBOutlet UITableView *mytableView;
 
 
 

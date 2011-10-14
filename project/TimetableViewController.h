@@ -50,11 +50,12 @@
 @property (nonatomic ,retain)NSDateFormatter *inFormatter;
 
 -(void)search;
--(void)performSearch;
+-(void)performSearch:(NSDictionary *)params;
 -(void)parse:(NSDictionary *)dict;
 -(IBAction)getNext:(id)sender;
 -(IBAction)getPrevious:(id)sender;
 //for internetconnectionstatus
 - (void)reachabilityChanged:(NSNotification *)note;
+- (BOOL)isDataSourceAvailable;
 
 @end

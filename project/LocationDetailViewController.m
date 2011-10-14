@@ -67,33 +67,14 @@
     [self.mapView zoomToFitAnnotations];
     self.mapView.showsUserLocation=YES;
     
-    /*
-    // locationManager update as location
-    locationManager = [[CLLocationManager alloc] init];
-    locationManager.delegate = self; 
-    locationManager.desiredAccuracy = kCLLocationAccuracyBest; 
-    locationManager.distanceFilter = kCLDistanceFilterNone; 
-    [locationManager startUpdatingLocation];
-     */
+
     //create map button
     mapButton = [[UIBarButtonItem alloc] initWithTitle: @"Map"
                                                                       style: UIBarButtonItemStyleBordered
                                                                      target: nil action: nil];
-    //self.navigationItem.rightBarButtonItem=mapButton;
+    
      
-    /*
     
-    CLLocation *curlocation = [locationManager location];
-    
-    // Configure the new event with information from the location
-    CLLocationCoordinate2D coordinate = [curlocation coordinate];
-    
-    NSString *latitude = [NSString stringWithFormat:@"%f", coordinate.latitude]; 
-    NSString *longitude = [NSString stringWithFormat:@"%f", coordinate.longitude];
-    
-    NSLog(@"dLatitude : %@", latitude); 
-    NSLog(@"dLongitude : %@",longitude);
-    */
 }
 
 - (void)viewDidUnload

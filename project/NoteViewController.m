@@ -15,7 +15,7 @@
 
 @synthesize fetchedResultsController=_fetchResultsController;
 @synthesize notes;
-@synthesize newNote,isInAddMode,isInEditMode, editButton,addButton,textview,titleField,tableView;
+@synthesize newNote,isInAddMode,isInEditMode, editButton,addButton,textview,titleField,mytableView;
 
 
 #pragma fetchresulcontroller
@@ -53,7 +53,6 @@
     // Release objects and return our controller
     [fetched release];
     [fetchRequest release];
-    //[entity release];
     [descriptor release];
     [notesArray release];
     
@@ -64,15 +63,19 @@
 }
 - (void)controllerDidChangeContent:(NSFetchedResultsController *)controller {
     // In the simplest, most efficient, case, reload the table view.
-    if (!self.tableView.editing) 
-        [self.tableView reloadData];
+    if (!self.mytableView.editing) 
+        [self.mytableView reloadData];
 }
 
-- (id)initWithStyle:(UITableViewStyle)style
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
-    self = [super initWithStyle:style];
+    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
+        //Add observers to the location manager 
+        // locations=[[NSMutableArray alloc]init];
+        
+        //[tableView init];
     }
     return self;
 }
@@ -87,7 +90,7 @@
     [newNote release];
     [textview release];
     [titleField release];
-    [tableView release];
+    [mytableView release];
     [delegate release];
     [super dealloc];
 }
@@ -117,7 +120,7 @@
 		exit(-1);  // Fail
 	}
     NSLog(@"note scount=%i",[notes count]);
-    [self.tableView reloadData];
+    [self.mytableView reloadData];
     addButton=[[UIBarButtonItem alloc]initWithTitle:@"Add" style:UIBarButtonSystemItemAction target:self action:@selector(toggleView)];
     editButton=[[UIBarButtonItem alloc]initWithTitle:@"Edit" style:UIBarButtonSystemItemAction target:self action:@selector(editAction)];
     self.navigationItem.leftBarButtonItem=addButton;
@@ -167,7 +170,7 @@
             textview.text=@"";
             titleField.text=@"";
             [self toggleView];
-            [self.tableView reloadData];
+            [self.mytableView reloadData];
         }
     }
     else{
@@ -178,10 +181,10 @@
             editButton.title=@"Done";
             isInEditMode=NO;
             if (notes.count>0) {
-                [self.tableView setEditing:YES animated:YES];
+                [self.mytableView setEditing:YES animated:YES];
             }
             else{
-                [self.tableView setEditing:NO animated:YES];
+                [self.mytableView setEditing:NO animated:YES];
             }
             
             
@@ -190,7 +193,7 @@
         else{
             editButton.title=@"Edit";
             isInEditMode=YES;
-            [self.tableView setEditing:NO animated:YES];
+            [self.mytableView setEditing:NO animated:YES];
             
         }
     }
@@ -205,7 +208,7 @@
     self.newNote=nil;
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
-    self.tableView=nil;
+    self.mytableView=nil;
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -272,14 +275,12 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-#warning Potentially incomplete method implementation.
     // Return the number of sections.
     return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-#warning Incomplete method implementation.
     // Create the fetch request, entity and sort descriptors
     NSFetchRequest *fetchRequest=[[NSFetchRequest alloc]init];
     NSEntityDescription *entity=[NSEntityDescription entityForName:@"Notes" inManagedObjectContext:delegate.managedObjectContext];    
@@ -371,13 +372,13 @@
             [notes removeObjectAtIndex:indexPath.row];
             //[self.tableView setEditing:NO animated:YES];
             if (notes.count==0) {
-                [self.tableView setEditing:NO animated:YES];
+                [self.mytableView setEditing:NO animated:YES];
             }
-            [self.tableView reloadData];
+            [self.mytableView reloadData];
             
         }
         else {
-            [self.tableView setEditing:NO animated:YES];
+            [self.mytableView setEditing:NO animated:YES];
         }
         
         

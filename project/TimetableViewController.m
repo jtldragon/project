@@ -79,8 +79,8 @@
     
     self.navigationItem.leftBarButtonItem=searchButton;
 
-    BOOL returnVal = [self isDataSourceAvailable];
-    availableNetwork = returnVal;
+    
+    availableNetwork = [self isDataSourceAvailable];
     datePicker.date =[NSDate date];
     if (!availableNetwork) {
         NSLog(@"unable");
@@ -119,6 +119,7 @@
     self.resultTable=nil;
     self.selectedIndex=NSUIntegerMax;
     self.searchView=nil;
+    
    
 }
 
@@ -342,7 +343,7 @@
 
 #pragma mark- reachibility
 - (void)reachabilityChanged:(NSNotification *)note {
-    [self updateStatus];
+   // [self updateStatus];
 }
 - (BOOL)isDataSourceAvailable {
     
